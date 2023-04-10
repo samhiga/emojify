@@ -1,0 +1,94 @@
+<!DOCTYPE html>>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+
+    <title>Emojify</title>
+  </head>
+
+  <body>
+    <div id="emojis">
+
+    </div>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </body>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    genre = 35; //comedy;
+    keywords = ['dancing'];
+   
+    
+
+    for (var j=0; j<keywords.length; j++){
+       
+        
+        keyword = keywords[j];
+        console.log(keyword);
+
+        var query = $('<h1>');
+        query.text(`The results for: Genre ${genre} and keyword ${keyword}`);
+        $("#emojis").append(query); 
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}&show_original_language=en&keyword=${keyword}`,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
+                "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
+            }
+        };
+
+        $.ajax(settings).done(function (data) {
+          
+
+            var responce = JSON.parse(data);
+
+            results = responce.result;
+      
+
+            for (var i = 0; i < results.length; i++) {
+            
+                console.log(results[i]) 
+                var movieDiv = $("<div class=\"animal-item\">");
+        
+    
+                var p_1 = $("<p>").text("Year: " + results[i].title);
+                var p_2 = $("<p>").text("Year: " + results[i].year );
+                var p_3 = $("<p>").text("Overviewx: " +  results[i].overview);
+
+                console.log(results[i].posterURLs["185"]);
+                    
+
+                var movieImage = $("<img>");
+
+                movieImage.attr("src", results[i].posterURLs["185"]);
+    
+                movieDiv.append(movieImage);
+                movieDiv.append(p_1);
+                movieDiv.append(p_2);
+                movieDiv.append(p_3);
+        
+
+        
+                $("#emojis").append(movieDiv);
+            }
+            
+
+
+            });
+   }
+
+});
+</script>
+</html>
