@@ -70,18 +70,20 @@
   for (var i = 0; i < results.length; i++) {
     var movie = results[i];
 
-    var tile = $('<div class="tile is-parent is-4">');
-
-    var box = $('<article class="tile is-child box">');
-    var title = $('<p class="title">').text(movie.title);
-    var year = $('<p>').text('Year: ' + movie.year);
-    var overview = $('<p>').text('Overview: ' + movie.overview);
+    var tile = $('<div class="tile is-parent is-12">');
+      // add styling to tiles here!
+    var box = $('<article class="tile is-child box has-background-danger">');
+    var title = $('<p class="title has-text-light">').text(movie.title);
+    var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
+    var overview = $('<p class="has-text-light">').text('Overview: ' + movie.overview);
     var image = $('<img>').attr('src', movie.posterURLs['185']);
 
     box.append(title);
     box.append(year);
     box.append(overview);
     box.append(image);
+
+    // box.css("background-color", "#ff4d4d");
 
     tile.append(box);
 
