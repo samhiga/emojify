@@ -19,4 +19,8 @@ let movieMood = {
   "History" : "old man", // 👴
   "Western" : "cowboy hat face", // 🤠
   "Musical" : "woman dancing", // 💃
+  "Sport" : "people wrestling", // 🤼
+  "Thiller" : "face screaming in fear", // 😱
+  "Short" : "", // 
+  "Adult" : "no one under eighteen", // 🔞
 };
