@@ -13,9 +13,23 @@
   </head>
 
   <body>
-    <div id="emojis">
+    
+    
+    <body>
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical is-12">
+          <div class="tile">
+            <div class="tile is-parent is-vertical">
+              <article class="tile is-child box">
+                <p class="title"> Emojify's Movie Picks!</p>
+                <div id="emojis"></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    </div>
+
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </body>
@@ -50,43 +64,31 @@
         };
 
         $.ajax(settings).done(function (data) {
-          
+  var response = JSON.parse(data);
+  var results = response.result;
 
-            var responce = JSON.parse(data);
+  for (var i = 0; i < results.length; i++) {
+    var movie = results[i];
 
-            results = responce.result;
-      
+    var tile = $('<div class="tile is-parent is-4">');
 
-            for (var i = 0; i < results.length; i++) {
-            
-                console.log(results[i]) 
-                var movieDiv = $("<div class=\"animal-item\">");
-        
-    
-                var p_1 = $("<p>").text("Year: " + results[i].title);
-                var p_2 = $("<p>").text("Year: " + results[i].year );
-                var p_3 = $("<p>").text("Overviewx: " +  results[i].overview);
+    var box = $('<article class="tile is-child box">');
+    var title = $('<p class="title">').text(movie.title);
+    var year = $('<p>').text('Year: ' + movie.year);
+    var overview = $('<p>').text('Overview: ' + movie.overview);
+    var image = $('<img>').attr('src', movie.posterURLs['185']);
 
-                console.log(results[i].posterURLs["185"]);
-                    
+    box.append(title);
+    box.append(year);
+    box.append(overview);
+    box.append(image);
 
-                var movieImage = $("<img>");
+    tile.append(box);
 
-                movieImage.attr("src", results[i].posterURLs["185"]);
-    
-                movieDiv.append(movieImage);
-                movieDiv.append(p_1);
-                movieDiv.append(p_2);
-                movieDiv.append(p_3);
-        
+    $("#emojis").append(tile);
+  }
+});
 
-        
-                $("#emojis").append(movieDiv);
-            }
-            
-
-
-            });
    }
 
 });
