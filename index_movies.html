@@ -16,13 +16,14 @@
     
     
     <body>
-      <div class="tile is-ancestor">
-        <div class="tile is-vertical is-12">
+      <div class="tile is-ancestor is-12">
+        <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child box">
                 <p class="title"> Emojify's Movie Picks!</p>
-                <div id="emojis"></div>
+                <div id="results"></div>
+                <div id="emojis" class="columns is-multiline"></div>
               </article>
             </div>
           </div>
@@ -50,7 +51,7 @@
 
         var query = $('<h1>');
         query.text(`The results for: Genre ${genre} and keyword ${keyword}`);
-        $("#emojis").append(query); 
+        $("#results").append(query); 
 
         var settings = {
             "async": true,
@@ -69,10 +70,10 @@
 
   for (var i = 0; i < results.length; i++) {
     var movie = results[i];
-
-    var tile = $('<div class="tile is-parent is-12">');
+// can change the layout here ex is-half,is-one-third, 
+    var tile = $('<div class="column is-one-third is-flex">');
       // add styling to tiles here!
-    var box = $('<article class="tile is-child box has-background-danger">');
+    var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
     var title = $('<p class="title has-text-light">').text(movie.title);
     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
     var overview = $('<p class="has-text-light">').text('Overview: ' + movie.overview);
@@ -86,6 +87,7 @@
     // box.css("background-color", "#ff4d4d");
 
     tile.append(box);
+    
 
     $("#emojis").append(tile);
   }
