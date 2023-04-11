@@ -1,5 +1,5 @@
 var movieMood = {
-  "Music": ["music"] , // 🎶 // all soubgriup music!
+  "Music": ["music"] , // 🎶 // all subgriup music!
   "Romance": ["kiss", "red heart", "hearts", "heart-eyes"] , // 💏 names contating these words
   "Comedy": ["grin", "laugh", "tears of joy"], // 🤣
   "Biography": ["memo", "scroll"], // 📝
@@ -60,7 +60,8 @@ var genres = {
     "Documentary":"99"
 }
 
-
+var genre;
+var keywords = [];
 
 $(document).ready(function() {
 
@@ -119,11 +120,17 @@ $(document).ready(function() {
             if (results[i].unicodeName.includes("couple with heart")){
                 continue;
             }
+            if (results[i].unicodeName.includes("five-thirty")){
+                continue;
+            }
             
             if (results[i].unicodeName.includes("E4")){
                 continue;
             }
             if (results[i].unicodeName.includes("mahjong")){
+                continue;
+            }
+            if (results[i].unicodeName.includes("new moon")){
                 continue;
             }
             if (results[i].unicodeName.includes("E3")){
@@ -176,7 +183,7 @@ $(document).ready(function() {
             for (var i = 0; i < random10.length; i++) {
 
                 var emoji = $('<div>');
-                emojiChar = $('<h1>');
+                var emojiChar = $('<h1>');
                 emoji.addClass("emojiDiv");
                 emojiChar.css({ 'font-size': "100px" });
                 emojiChar.text(random10[i].character);
@@ -207,16 +214,16 @@ $(document).ready(function() {
 
         for (var i = 0; i < random10.length; i++) {
 
-            var keyWord = $('<div>');
-            keyWord.addClass("keyWordDiv");
-            keyWordChar = $('<h1>');
+            var keyWordEmoji = $('<div>');
+            keyWordEmoji.addClass("keyWordDiv");
+            var keyWordChar = $('<h1>');
             keyWordChar.css({'font-size': "100px" });
             keyWordChar.text(random10[i].character);
-            keyWord.append(keyWordChar);
+            keyWordEmoji.append(keyWordChar);
             
-            keyWord.attr("data-group", random10[i].group);
-            keyWord.attr("data-subGroup", random10[i].subGroup);
-            keyWord.attr("data-name", random10[i].unicodeName);
+            keyWordEmoji.attr("data-group", random10[i].group);
+            keyWordEmoji.attr("data-subGroup", random10[i].subGroup);
+            keyWordEmoji.attr("data-name", random10[i].unicodeName);
             // var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
             // var p_2 = $("<p>").text("Group: " +  random10[i].group);
             // var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
@@ -224,7 +231,7 @@ $(document).ready(function() {
             // emoji.append(p_1);
             // emoji.append(p_2);
             // emoji.append(p_3);
-            $('#emojis').append(keyWord);
+            $('#emojis').append(keyWordEmoji);
             
         }
         $('#chooseKeyWord-btn').text("Generate keywords again! 🌹");
@@ -242,9 +249,21 @@ $(document).ready(function() {
         chosenEmoji.text($(this).children().eq(0).text());
         $("#KeyWordEmotion").append(chosenEmoji);
     
-     
         $("#chooseKeyWord-btn").css("display", "none");
         $('#emojis').empty();
+        
+        name_words = name.split(" ");
+        console.log(name_words);
+        keywords.push(name);
+        for (var j=0; j<name_words.length; j++){
+            word = name_words[j];
+            if (word!=="person" && word!=="face" && word!=="man" && word!=="woman"){
+                keywords.push(word);
+            }
+        }
+        console.log(keywords);
+        pickMovie(genre, keywords)
+
 
 
     }
@@ -252,6 +271,7 @@ $(document).ready(function() {
     function pickEmoji(){
        
         var name = $(this).attr("data-name");
+        console.log(name);
         var group = $(this).attr("data-group");
         var subGroup = $(this).attr("data-subGroup");
   
@@ -263,12 +283,34 @@ $(document).ready(function() {
         $("#chooseEmoji-btn").css("display", "none");
         $("#chooseKeyWord-btn").css("display", "block");
         $('#emojis').empty();
-
+        if (subGroup == "music"){
+            genre = genres["Music"]
+        }
+        else if (subGroup == "person-sport"){
+            genre = genres["Sport"];
+            name_words = name.split(" ");
+            keywords.push(name_words[name_words.length-1]);
+        }
+        else{
+            for (const [key, value] of Object.entries(movieMood)) {
+                for (var j = 0; j<value.length;j++ ){
+                    if (name.includes(value[j])){
+                        genre = genres[key];
+                        console.log(key);
+                        break;
+                    }
+                }
+            
+            }
+        
+        }
+        
+        if (!genre){
+            genre = "27";
+        }
+        console.log(genre);
 
     }
-
-
-
 
 
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
@@ -278,3 +320,8 @@ $(document).ready(function() {
     $(document).on("click", ".keyWordDiv",pickKeyWord);
 
 });
+
+
+
+
+    
