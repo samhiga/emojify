@@ -29,8 +29,43 @@ var movieMood = {
   "Documentary" : ["video camera", "film frames", "bookmark tabs"] // 📹
 };
 
+var genres = {
+    "Biography": "1",
+    "Music": "10402",
+    "Romance": "10749",
+    "Family":"10751",
+    "War":"10752",
+    "News":"10763",
+    "Reality":"10764",
+    "Talk Show":"10767",
+    "Adventure":"12",
+    "Fantasy":"14",
+    "Animation":"16",
+    "Drama":"18",
+   "Film Noir": "2",
+    "Horror":"27",
+    "Action":"28",
+    "Game Show":"3",
+    "Comedy":"35",
+    "History":"36",
+    "Western":"37",
+    "Musical":"4",
+    "Sport":"5",
+    "Thriller":"53",
+    "Short":"6",
+    "Adult":"7",
+    "Crime":"80",
+    "Science Fiction":"878",
+    "Mystery":"9648",
+    "Documentary":"99"
+}
+
+
 
 $(document).ready(function() {
+
+    
+
     function getRandomSubarray(arr, size) {
         var shuffled = arr.slice(0), i = arr.length, temp, index;
         while (i--) {
@@ -44,13 +79,12 @@ $(document).ready(function() {
     
     var genreEmoji = [];
     for (const [key, value] of Object.entries(movieMood)) {
-        console.log(key);
         for (var j = 0; j<value.length;j++ ){
             genreEmoji.push(value[j]);
         }
     
     }
-    console.log(genreEmoji);
+
     
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
@@ -77,6 +111,9 @@ $(document).ready(function() {
                 continue;
             }
             if (results[i].unicodeName.includes("E0")){
+                continue;
+            }
+            if (results[i].unicodeName.includes("E5")){
                 continue;
             }
             if (results[i].unicodeName.includes("couple with heart")){
@@ -135,12 +172,12 @@ $(document).ready(function() {
             $('#emojis').empty()
             var random10 = getRandomSubarray(emojiToPresent, 10);
 
-            console.log(random10);
 
             for (var i = 0; i < random10.length; i++) {
 
                 var emoji = $('<div>');
                 emojiChar = $('<h1>');
+                emoji.addClass("emojiDiv");
                 emojiChar.css({ 'font-size': "100px" });
                 emojiChar.text(random10[i].character);
                 emoji.append(emojiChar);
@@ -148,13 +185,13 @@ $(document).ready(function() {
                 emoji.attr("data-group", random10[i].group);
                 emoji.attr("data-subGroup", random10[i].subGroup);
                 emoji.attr("data-name", random10[i].unicodeName);
-                var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
-                var p_2 = $("<p>").text("Group: " +  random10[i].group);
-                var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
+                // var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
+                // var p_2 = $("<p>").text("Group: " +  random10[i].group);
+                // var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
             
-                emoji.append(p_1);
-                emoji.append(p_2);
-                emoji.append(p_3);
+                // emoji.append(p_1);
+                // emoji.append(p_2);
+                // emoji.append(p_3);
                 $('#emojis').append(emoji);
                 
             }
@@ -166,35 +203,78 @@ $(document).ready(function() {
         $('#emojis').empty()
         var random10 = getRandomSubarray(keyWordsToPresent, 10);
 
-        console.log(random10);
+
 
         for (var i = 0; i < random10.length; i++) {
 
-            var emoji = $('<div>');
-            emojiChar = $('<h1>');
-            emojiChar.css({ 'font-size': "100px" });
-            emojiChar.text(random10[i].character);
-            emoji.append(emojiChar);
+            var keyWord = $('<div>');
+            keyWord.addClass("keyWordDiv");
+            keyWordChar = $('<h1>');
+            keyWordChar.css({'font-size': "100px" });
+            keyWordChar.text(random10[i].character);
+            keyWord.append(keyWordChar);
             
-            emoji.attr("data-group", random10[i].group);
-            emoji.attr("data-subGroup", random10[i].subGroup);
-            emoji.attr("data-name", random10[i].unicodeName);
-            var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
-            var p_2 = $("<p>").text("Group: " +  random10[i].group);
-            var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
+            keyWord.attr("data-group", random10[i].group);
+            keyWord.attr("data-subGroup", random10[i].subGroup);
+            keyWord.attr("data-name", random10[i].unicodeName);
+            // var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
+            // var p_2 = $("<p>").text("Group: " +  random10[i].group);
+            // var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
         
-            emoji.append(p_1);
-            emoji.append(p_2);
-            emoji.append(p_3);
-            $('#emojis').append(emoji);
+            // emoji.append(p_1);
+            // emoji.append(p_2);
+            // emoji.append(p_3);
+            $('#emojis').append(keyWord);
             
         }
-        $('#chooseEmoji-btn').text("Generate keywords again! 🌹");
+        $('#chooseKeyWord-btn').text("Generate keywords again! 🌹");
     
-}  
+    }  
+
+    function pickKeyWord(){
+       
+        var name = $(this).attr("data-name");
+        var group = $(this).attr("data-group");
+        var subGroup = $(this).attr("data-subGroup");
+  
+        var chosenEmoji = $('<h1>');
+        chosenEmoji.css({'font-size': "150px" });
+        chosenEmoji.text($(this).children().eq(0).text());
+        $("#KeyWordEmotion").append(chosenEmoji);
+    
+     
+        $("#chooseKeyWord-btn").css("display", "none");
+        $('#emojis').empty();
+
+
+    }
+
+    function pickEmoji(){
+       
+        var name = $(this).attr("data-name");
+        var group = $(this).attr("data-group");
+        var subGroup = $(this).attr("data-subGroup");
+  
+        var chosenEmoji = $('<h1>');
+        chosenEmoji.css({'font-size': "150px" });
+        chosenEmoji.text($(this).children().eq(0).text());
+        $("#genreEmotion").append(chosenEmoji);
+    
+        $("#chooseEmoji-btn").css("display", "none");
+        $("#chooseKeyWord-btn").css("display", "block");
+        $('#emojis').empty();
+
+
+    }
+
+
+
 
 
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
+
+    $(document).on("click", ".emojiDiv", pickEmoji);
+    $(document).on("click", ".keyWordDiv",pickKeyWord);
 
 });
