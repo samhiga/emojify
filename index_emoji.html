@@ -45,29 +45,24 @@
             subGroups.add(results[i].subGroup);
           }
         }
-        // for (var i = 0; i < results.length; i++) {
-        //   var emojiDiv = $('<div class="animal-item">');
+        for (var i = 0; i < results.length; i++) {
+          var emojiDiv = $('<div class="animal-item">');
 
-        //   //var rating = results[i].rating;
+          //var rating = results[i].rating;
 
-        //   var p_1 = $("<p>").text("Name: " + results[i].unicodeName);
-        //   var p_2 = $("<p>").text("Group: " + results[i].group);
-        //   var p_3 = $("<p>").text("Subgroup: " + results[i].subGroup);
+          var p_1 = $("<p>").text("Name: " + results[i].unicodeName);
+          var p_2 = $("<p>").text("Group: " + results[i].group);
+          var p_3 = $("<p>").text("Subgroup: " + results[i].subGroup);
 
-        //   var emojiImage = $("<h1>");
-        //   emojiImage.text(results[i].character);
-        //   emojiDiv.append(emojiImage);
-        //   emojiDiv.append(p_1);
-        //   emojiDiv.append(p_2);
-        //   emojiDiv.append(p_3);
+          var emojiImage = $("<h1>");
+          emojiImage.text(results[i].character);
+          emojiDiv.append(emojiImage);
+          emojiDiv.append(p_1);
+          emojiDiv.append(p_2);
+          emojiDiv.append(p_3);
 
-        //   $("#emojis").append(emojiDiv);
-        // }
-
-
-            //textArea.textContent = event.target;
-          }
-        });
+          $("#emojis").append(emojiDiv);
+        }
 
         // for (var i = 0; i < 20; i++) {
         //   var listItem = document.createElement("li");
@@ -86,8 +81,9 @@
 
         // emojiList.Eventlistener("click", selectEmoji);
 
-        console.log(subGroups);
-      });
+        // console.log(subGroups);
+
     });
+  });
   </script>
 </html>
