@@ -52,16 +52,16 @@ $(document).ready(function() {
     }
     console.log(genreEmoji);
     
-    var API_key = '352cbcc2559967a6e748bbd1b737ab1e71d5f6a5'
-    
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
-    var subGroupsToInclude =["music", "person-sport"];
-    var wordsToExclude = ["skin tone"];
+    var subGroupsEmotionToInclude =["music", "person-sport"];
+    var subGroupsToInclude =["animal-bird","animal-amphibian","animal-reptile","animal-marine","animal-bug", "plant-flower", "plant-other", "food-fruit",
+    "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware", "transport-ground","transport-water",
+    "transport-air", "hotel", "time", "event", "award-medal","game","arts-crafts","clothing"];
     
     var emojiToPresent = [];
     
-
+    var keyWordsToPresent = [];
 
     $.ajax({
         url: queryURL,
@@ -105,8 +105,12 @@ $(document).ready(function() {
             if (results[i].unicodeName.includes("selfie")){
                 continue;
             }
-        
+
+            
             if (subGroupsToInclude.includes(results[i].subGroup)){
+                keyWordsToPresent.push(results[i]);
+            }
+            if (subGroupsEmotionToInclude.includes(results[i].subGroup)){
                 emojiToPresent.push(results[i]);
             }
             else{
@@ -129,7 +133,7 @@ $(document).ready(function() {
   
     function GenerateEmojis(){    
             $('#emojis').empty()
-            random10 = getRandomSubarray(emojiToPresent, 10);
+            var random10 = getRandomSubarray(emojiToPresent, 10);
 
             console.log(random10);
 
@@ -154,10 +158,43 @@ $(document).ready(function() {
                 $('#emojis').append(emoji);
                 
             }
-            $('#chooseEmoji-btn').text("Generate again! 😉");
+            $('#chooseEmoji-btn').text("Generate emotions again! 😉");
         
     }  
 
+    function GenerateKeyWords(){    
+        $('#emojis').empty()
+        var random10 = getRandomSubarray(keyWordsToPresent, 10);
+
+        console.log(random10);
+
+        for (var i = 0; i < random10.length; i++) {
+
+            var emoji = $('<div>');
+            emojiChar = $('<h1>');
+            emojiChar.css({ 'font-size': "100px" });
+            emojiChar.text(random10[i].character);
+            emoji.append(emojiChar);
+            
+            emoji.attr("data-group", random10[i].group);
+            emoji.attr("data-subGroup", random10[i].subGroup);
+            emoji.attr("data-name", random10[i].unicodeName);
+            var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
+            var p_2 = $("<p>").text("Group: " +  random10[i].group);
+            var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
+        
+            emoji.append(p_1);
+            emoji.append(p_2);
+            emoji.append(p_3);
+            $('#emojis').append(emoji);
+            
+        }
+        $('#chooseEmoji-btn').text("Generate keywords again! 🌹");
+    
+}  
+
+
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
+    $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
 
 });
