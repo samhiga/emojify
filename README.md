@@ -30,6 +30,3 @@ We learned...
 [Liubov Sobolevskaya](https://github.com/LiubovSobolevskaya) <br />
 [Sabeen Chaudhry](https://github.com/sabeen44) <br />
 [Sam Higa](https://github.com/samhiga) <br />
-
-## Credits
-Thank you to [Zan Kavtaskin](https://gist.github.com/zkavtaskin) for [choice function](https://gist.github.com/zkavtaskin/172ae14846406892bc838a837ba0f3a5)
