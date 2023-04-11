@@ -11,4 +11,8 @@ let movieMood = {
   "Adventure" : "person mountain biking", // 🚵
   "Fantasy" : "mage", // 🧙
   "Animation" : "", //
+  "Drama" : "performing arts", // 🎭
+  "Film Noir" : "", //
+  "Horror" : "zombie", // 🧟
+  "Action" : "crossed swords", // ⚔️
 };
