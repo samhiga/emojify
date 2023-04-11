@@ -7,4 +7,8 @@ let movieMood = {
   "War": "bomb", // 💣
   "News": "newspaper", // 📰
   "Reality": "person tipping hand", // 💁
+  "Talk Show": "speaking head", // 🗣️
+  "Adventure" : "person mountain biking", // 🚵
+  "Fantasy" : "mage", // 🧙
+  "Animation" : "", //
 };
