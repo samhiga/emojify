@@ -23,4 +23,8 @@ let movieMood = {
   "Thiller" : "face screaming in fear", // 😱
   "Short" : "", // 
   "Adult" : "no one under eighteen", // 🔞
+  "Crime" : "police officer", // 👮
+  "Science Fiction" : "alien", // 👽
+  "Mystery" : "detective", // 🕵️
+  "Documentary" : "video camera" // 📹
 };
