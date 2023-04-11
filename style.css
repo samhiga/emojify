@@ -1,0 +1,24 @@
+#emoji-button {
+  display: flex;
+
+  padding: 20px;
+
+  justify-content: space-between;
+
+  flex-direction: row;
+
+  max-width: 400px;
+
+  flex-wrap: wrap;
+}
+
+.buttonClass {
+  margin-bottom: 10px;
+  width: 200px;
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+#area {
+  font-size: 30px;
+}
