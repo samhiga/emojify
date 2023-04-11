@@ -24,7 +24,7 @@ We learned...
 
 ## Demo
 
-## Contrubitors
+## Contributors
 
 [Emanuel Molina](https://github.com/AcquahLopid/) <br />
 [Liubov Sobolevskaya](https://github.com/LiubovSobolevskaya) <br />
