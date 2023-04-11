@@ -15,4 +15,8 @@ let movieMood = {
   "Film Noir" : "", //
   "Horror" : "zombie", // 🧟
   "Action" : "crossed swords", // ⚔️
+  "Game Show" : "slot machine", // 🎰
+  "History" : "old man", // 👴
+  "Western" : "cowboy hat face", // 🤠
+  "Musical" : "woman dancing", // 💃
 };
