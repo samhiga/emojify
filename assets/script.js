@@ -3,4 +3,8 @@ let movieMood = {
   "Romance": "Kiss", // 💏
   "Comedy": "rolling on the floor laughing", // 🤣
   "Biography": "memo", // 📝
+  "Family": "family", // 👪
+  "War": "bomb", // 💣
+  "News": "newspaper", // 📰
+  "Reality": "person tipping hand", // 💁
 };
