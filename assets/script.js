@@ -63,6 +63,7 @@ var genres = {
 var genre;
 var keywords = [];
 
+
 $(document).ready(function() {
 
     
@@ -90,10 +91,10 @@ $(document).ready(function() {
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
     var subGroupsEmotionToInclude =["music", "person-sport"];
-    // var subGroupsToInclude =["animal-bird","animal-amphibian","animal-reptile","animal-marine","animal-bug", "plant-flower", "plant-other", "food-fruit",
-    // "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware", "transport-ground","transport-water",
-    // "transport-air", "hotel", "time", "event", "award-medal","game","arts-crafts","clothing"];
-    subGroupsToInclude = ["food-sweet"];
+    var subGroupsToInclude =["animal-bird","animal-amphibian","animal-reptile","animal-marine","animal-bug", "plant-flower", "plant-other", "food-fruit",
+    "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware", "transport-ground","transport-water",
+    "transport-air", "hotel", "time", "event", "award-medal","game","arts-crafts","clothing"];
+
     var emojiToPresent = [];
     
     var keyWordsToPresent = [];
@@ -249,7 +250,7 @@ $(document).ready(function() {
         chosenEmoji.text($(this).children().eq(0).text());
         $("#KeyWordEmotion").append(chosenEmoji);
     
-        $("#chooseKeyWord-btn").css("display", "none");
+       
         $('#emojis').empty();
         
         name_words = name.split(" ");
@@ -265,9 +266,16 @@ $(document).ready(function() {
             keywords.push(name);
         }
         console.log(keywords);
-        
 
-        pickMovie(genre, keywords);
+
+        if (keywords.length>10)
+        {
+            $("#chooseKeyWord-btn").css("display", "none");
+            pickMovie(genre, keywords);
+            
+        }
+            
+   
 
 
 
@@ -321,6 +329,8 @@ $(document).ready(function() {
 
     $(document).on("click", ".emojiDiv", pickEmoji);
     $(document).on("click", ".keyWordDiv",pickKeyWord);
+
+
 
 });
 
