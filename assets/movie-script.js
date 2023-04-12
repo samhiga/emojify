@@ -1,15 +1,15 @@
-$(document).ready(function() {
 
-    
-    
-    function pickMovie(genre, keywords){
 
-        $("body").empty;
+function pickMovie(genre, keywords){
+
+        $("#genreEmotion").empty();
+        $("#KeyWordEmotion").empty();
         for (var j=0; j<keywords.length; j++){
         
             
             keyword = keywords[j];
             console.log(keyword);
+            console.log(genre);
 
             var query = $('<h1>');
             query.text(`The results for: Genre ${genre} and keyword ${keyword}`);
@@ -53,7 +53,7 @@ $(document).ready(function() {
                     box.append(overview);
                     box.append(media);
 
-            // box.css("background-color", "#ff4d4d");
+                   // box.css("background-color", "#ff4d4d");
 
                     tile.append(box);
             
@@ -64,5 +64,3 @@ $(document).ready(function() {
 
     }
 }
-
-});

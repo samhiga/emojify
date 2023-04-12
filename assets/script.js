@@ -13,14 +13,14 @@ var movieMood = {
   "Animation" : ["eyes", " mouse face"], //
   "Drama" : ["performing arts", "crying face", "broken heart"], // 🎭
   "Film Noir" : ['magnifying glass', 'cigarette', 'black heart', 'night with stars'], //
-  "Horror" : ['face screaming in fear'], // 🧟
+  "Horror" : ['face screaming in fear'], // 🧟// 😱
   "Action" : ["helicopter", "motorcycle", "pistol"], // ⚔️
   "Game Show" : ["slot machine", "thinking face"], // 🎰
   "History" : ["old man", "face with monocle"], // 👴
   "Western" : ["cowboy hat face"], // 🤠
   "Musical" : ["woman dancing"], // 💃
   "Sport" : ["person-sport"], //subgroup
-  "Thiller" : ["face screaming in fear"], // 😱
+  "Thiller" : ["drop of blood", 'skul'], 
   "Short" : ["ruler"], // 
   "Adult" : ["no one under eighteen"], // 🔞
   "Crime" : ["police officer", "police car light", "oncoming police car", "police car"], // 👮
@@ -90,10 +90,10 @@ $(document).ready(function() {
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
     var subGroupsEmotionToInclude =["music", "person-sport"];
-    var subGroupsToInclude =["animal-bird","animal-amphibian","animal-reptile","animal-marine","animal-bug", "plant-flower", "plant-other", "food-fruit",
-    "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware", "transport-ground","transport-water",
-    "transport-air", "hotel", "time", "event", "award-medal","game","arts-crafts","clothing"];
-    
+    // var subGroupsToInclude =["animal-bird","animal-amphibian","animal-reptile","animal-marine","animal-bug", "plant-flower", "plant-other", "food-fruit",
+    // "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware", "transport-ground","transport-water",
+    // "transport-air", "hotel", "time", "event", "award-medal","game","arts-crafts","clothing"];
+    subGroupsToInclude = ["food-sweet"];
     var emojiToPresent = [];
     
     var keyWordsToPresent = [];
@@ -254,15 +254,20 @@ $(document).ready(function() {
         
         name_words = name.split(" ");
         console.log(name_words);
-        keywords.push(name);
+        
         for (var j=0; j<name_words.length; j++){
             word = name_words[j];
             if (word!=="person" && word!=="face" && word!=="man" && word!=="woman"){
                 keywords.push(word);
             }
         }
+        if (name_words.length>1){
+            keywords.push(name);
+        }
         console.log(keywords);
-        pickMovie(genre, keywords)
+        
+
+        pickMovie(genre, keywords);
 
 
 
@@ -276,15 +281,16 @@ $(document).ready(function() {
         var subGroup = $(this).attr("data-subGroup");
   
         var chosenEmoji = $('<h1>');
-        chosenEmoji.css({'font-size': "150px" });
+        chosenEmoji.css({'font-size':'150px'});
         chosenEmoji.text($(this).children().eq(0).text());
+
         $("#genreEmotion").append(chosenEmoji);
-    
         $("#chooseEmoji-btn").css("display", "none");
         $("#chooseKeyWord-btn").css("display", "block");
         $('#emojis').empty();
+
         if (subGroup == "music"){
-            genre = genres["Music"]
+            genre = genres["Music"];
         }
         else if (subGroup == "person-sport"){
             genre = genres["Sport"];
@@ -292,7 +298,7 @@ $(document).ready(function() {
             keywords.push(name_words[name_words.length-1]);
         }
         else{
-            for (const [key, value] of Object.entries(movieMood)) {
+            for (const [key, value] of Object.entries(movieMood)){
                 for (var j = 0; j<value.length;j++ ){
                     if (name.includes(value[j])){
                         genre = genres[key];
@@ -300,16 +306,13 @@ $(document).ready(function() {
                         break;
                     }
                 }
-            
-            }
-        
+            }       
         }
         
         if (!genre){
             genre = "27";
         }
         console.log(genre);
-
     }
 
 
