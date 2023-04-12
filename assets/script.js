@@ -272,6 +272,7 @@ $(document).ready(function() {
         {
             $("#chooseKeyWord-btn").css("display", "none");
             pickMovie(genre, keywords);
+            console.log(pickMovie(genre, keywords))
             
         }
             
