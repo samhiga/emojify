@@ -16,7 +16,7 @@ var movieMood = {
   "Horror" : ['face screaming in fear'], // 🧟// 😱
   "Action" : ["helicopter", "motorcycle", "pistol"], // ⚔️
   "Game Show" : ["slot machine", "thinking face"], // 🎰
-  "History" : ["old man", "face with monocle"], // 👴
+  "History" : ["old man", "face with monocle", 'film frames', 'film projector', 'mantelpiece clock'], // 👴
   "Western" : ["cowboy hat face"], // 🤠
   "Musical" : ["woman dancing"], // 💃
   "Sport" : ["person-sport"], //subgroup
@@ -25,7 +25,7 @@ var movieMood = {
   "Adult" : ["no one under eighteen"], // 🔞
   "Crime" : ["police officer", "police car light", "oncoming police car", "police car"], // 👮
   "Science Fiction" : ["nerdy face", "dna", "telescope", "test tube"], // 👽
-  "Mystery" : ["detective", "silhouette","briefcase",  "compass", "old key"], // 🕵️
+  "Mystery" : ["detective", "silhouette","briefcase",  "compass", "old key", "puzzle"], // 🕵️
   "Documentary" : ["video camera", "film frames", "bookmark tabs"] // 📹
 };
 
@@ -42,7 +42,7 @@ var genres = {
     "Fantasy":"14",
     "Animation":"16",
     "Drama":"18",
-   "Film Noir": "2",
+    "Film Noir": "2",
     "Horror":"27",
     "Action":"28",
     "Game Show":"3",
@@ -121,7 +121,10 @@ $(document).ready(function() {
             if (results[i].unicodeName.includes("couple with heart")){
                 continue;
             }
-            if (results[i].unicodeName.includes("five-thirty")){
+            if (results[i].unicodeName.includes("-thirty")){
+                continue;
+            }
+            if (results[i].unicodeName.includes("o’clock")){
                 continue;
             }
             
@@ -258,7 +261,7 @@ $(document).ready(function() {
         
         for (var j=0; j<name_words.length; j++){
             word = name_words[j];
-            if (word!=="person" && word!=="face" && word!=="man" && word!=="woman"){
+            if (word!=="person" && word!=="face" && word!=="man" && word!=="woman" && word!=="with"&& word!=="and"){
                 keywords.push(word);
             }
         }
@@ -268,16 +271,12 @@ $(document).ready(function() {
         console.log(keywords);
 
 
-        if (keywords.length>10)
-        {
+        if (keywords.length>5){
             $("#chooseKeyWord-btn").css("display", "none");
             pickMovie(genre, keywords);
             
         }
-            
-   
-
-
+        
 
     }
 

@@ -35,7 +35,7 @@
         </div>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./assets/practice-script.js"></script> 
+      <script src="./assets/practice-script.js"></script> 
 
   
     
@@ -76,7 +76,7 @@
 
   for (var i = 0; i < results.length; i++) {
     var movie = results[i];
-// can change the layout here ex is-half,is-one-third, 
+    // can change the layout here ex is-half,is-one-third, 
     var tile = $('<div class="column is-one-third is-flex">');
     // add styling to tiles here!
     var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
@@ -90,12 +90,12 @@
     var mediaContent = $('<div class="media-content"></div>').append(image);
     var mediaRight = $('<div class="media-right has-text-centered"></div>').append(review);
 
-  media.append(mediaContent).append(mediaRight);
-  box.append(title);
-  box.append(tagline);
-  box.append(year);
-  box.append(overview);
-  box.append(media);
+    media.append(mediaContent).append(mediaRight);
+    box.append(title);
+    box.append(tagline);
+    box.append(year);
+    box.append(overview);
+    box.append(media);
 
     // box.css("background-color", "#ff4d4d");
 

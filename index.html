@@ -26,7 +26,7 @@
     <main>
       <div id = "emojipicker" class="container is-flex-wrap-wrap is-justify-content-center is-align-items-center">
         <div id = "genreEmotion" ></div>
-        <div id = "KeyWordEmotion"></div>
+        <div id = "KeyWordEmotion"> </div>
 
       </div>
     
@@ -34,17 +34,22 @@
       <button id="chooseEmoji-btn" style="margin: auto;"> Choose an Emoji 🤪</button>
       <button id="chooseKeyWord-btn" style="display:none; margin: auto"> Choose an Keyword 🎪</button>
 
-      <div id = "movieshow" class="tile is-vertical" style = "display:none;">
-        <div class="tile">
+
+      <div class="tile is-ancestor is-12">
+        <div class="tile is-vertical">
+          <div class="tile">
             <div class="tile is-parent is-vertical">
-                <article class="tile is-child box">
+              <article class="tile is-child box">
                 <p class="title"> Emojify's Movie Picks!</p>
                 <div id="results"></div>
-                <div id="emojis" class="columns is-multiline"></div>
-                </article>
+                <div id="movies" class="columns is-multiline"></div>
+              </article>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+  
+
 
     </main>
 
