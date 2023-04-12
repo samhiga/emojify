@@ -8,16 +8,17 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel='stylesheet' href='./assets/style.css'>
-
+    <link rel="stylesheet" type="text/css" href = "https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css"/>
+    
     <title>Emojify</title>
   </head>
-
+  
   <body>
     <header class="hero is-danger">
       <div class="hero-body">
         <div class="columns">
           <div class="column"> 
-            <p class="title"><img src="Emojify Logo.png" width="50px" />Emojify</p>
+            <p class="title"><img src="assets/Emojify Logo.png" width="50px" />Emojify</p>
             <p class="subtitle">to Simplify!</p>          
           </div>
           <div class="column is-vcentered">
@@ -29,7 +30,7 @@
               <div class="column"> 
                 <div id = "KeyWordEmotion"  class="tile"></div> 
               </div>
-
+              
             </div>
           </div>
         </div>
@@ -40,16 +41,20 @@
     <main>
       <section class="container has-text-centered is-4 is-offset-4" style="margin-top:35px" >
         <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Generate Emojis🤪</button>
+        <div id="my-loader" class= "text-danger ldld bare"></div>
+        <!-- <img class="ldld" src="assets/Emojify Logo.png"/> -->
         <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose an Keyword 🎪</button>
-        <div id="emojis" class="container is-flex is-justify-content-space-around"> </div> 
-      </section>
 
+        <div id="emojis" class="container is-flex is-justify-content-space-around"> </div> 
+
+      </section>
+      
       <div class="tile is-ancestor is-12" style="display:none">
         <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child box">
-      
+                
                 <div id="results"></div>
                 <div id="movies" class="columns is-multiline"></div>
               </article>
@@ -57,13 +62,14 @@
           </div>
         </div>
       </div>
-  
+      
 
 
     </main>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src = "https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script>
     <script src="./assets/movie-script.js"></script>
     <script src="./assets/script.js"></script>
     
