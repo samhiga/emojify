@@ -269,13 +269,12 @@ $(document).ready(function() {
             keywords.push(name);
         }
         console.log(keywords);
-
-
-        if (keywords.length>5){
-            $("#chooseKeyWord-btn").css("display", "none");
-            pickMovie(genre, keywords);
-            
-        }
+        $("#chooseKeyWord-btn").css("display", "none");
+        pickMovie(genre, keywords);
+        // if (keywords.length>5){
+        //     $("#chooseKeyWord-btn").css("display", "none");
+        //    pickMovie(genre, keywords);       
+        //}
         
 
     }

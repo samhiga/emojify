@@ -1,19 +1,11 @@
-
-
 function pickMovie(genre, keywords){
     var total_movies = 0;
-    $("#genreEmotion").empty();
-    $("#KeyWordEmotion").empty();
+
+    $(".is-ancestor").css("display", "block");
     for (var j=0; j<keywords.length; j++){
-        
             
             keyword = keywords[j];
-            console.log(keyword);
-            console.log(genre);
 
-            var query = $('<h1>');
-            query.text(`The results for: Genre ${genre} and keyword ${keyword}`);
-            $("#results").append(query); 
 
             var settings = {
                 "async": true,
@@ -30,15 +22,22 @@ function pickMovie(genre, keywords){
                 var response = JSON.parse(data);
                 var results = response.result;
                 total_movies += results.length;
+ 
                 // can change the layout here ex is-half,is-one-third, 
                
                 for (var i = 0; i < results.length; i++) {
                     var movie = results[i];
+                    movieGenres = "";
+                    for (var j=0; j<movie.genres.length; j++){
+                        movieGenres =  movieGenres.concat(movie.genres[j].name, ', ');             
+                    }
+                    movieGenres = movieGenres.substring(0, movieGenres.length - 2);
+      
                     var tile = $('<div class="column is-one-third is-flex">');
                     // add styling to tiles here!
-                    var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
+                    var box = $('<article class="tile is-child box has-background-danger is-align-items-left">');
                     var title = $('<p class="title has-text-light">').text(movie.title);
-                    var tagline = $('<p class=" has-text-light is-size-4">').text(movie.tagline);
+                    var genres = $('<p class="has-text-light">').text('Genres: ' + movieGenres);
                     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
                     var overview = $('<p class="has-text-light">').text (movie.overview);
                     var image = $('<img>').attr('src', movie.posterURLs['185']);
@@ -49,8 +48,8 @@ function pickMovie(genre, keywords){
 
                     media.append(mediaContent).append(mediaRight);
                     box.append(title);
-                    box.append(tagline);
                     box.append(year);
+                    box.append(genres);
                     box.append(overview);
                     box.append(media);
 
@@ -66,7 +65,7 @@ function pickMovie(genre, keywords){
 
     }
     if (total_movies == 0){
-
+        console.log("NO MOVIES FOR THIS KEYWORD!!!")
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -81,32 +80,43 @@ function pickMovie(genre, keywords){
         $.ajax(settings).done(function (data) {
             var response = JSON.parse(data);
             var results = response.result;
-            total_movies += results.length;
-            bestMoviesIds = 0;
-            secondBestMoviesIds = 0;
-
-            bestMovieRating = results[0].imdbRating;
-            for (var i = 0; i < results.length; i++) {
-                var movie = results[i];
-                if (movie.imdbRating > bestMovieRating){
-                    secondBestMoviesIds = bestMoviesIds;
-                    bestMoviesIds = i;
+            var bestMoviesIds = 0;
+            var secondBestMoviesIds = 0;
+            var moviesToPresent = [0];
+            var bestMovieRating = results[0].imdbRating;
+            
+            if (results.length>1){
+                for (var i = 0; i < results.length; i++) {
+                    var movie = results[i];
+        
+                    if (movie.imdbRating > bestMovieRating){
+                        secondBestMoviesIds = bestMoviesIds;
+                        bestMoviesIds = i;
+                    }
                 }
+                moviesToPresent = [secondBestMoviesIds, bestMoviesIds];
             }
-            moviesToPresent = [secondBestMoviesIds, estMoviesIds];
-            array.forEach(element => {
-                
-            });
-
+            console.log(moviesToPresent);
+            
             moviesToPresent.forEach(element =>
                 {
+                    console.log(element);
                     var movie = results[element];
+                    console.log(movie.title);
+                      
+                    movieGenres = "";
+            
+                    for (var j=0; j<movie.genres.length; j++){
+                        movieGenres = movieGenres.concat(movie.genres[j].name, ', ');             
+                    }
+                    movieGenres = movieGenres.substring(0, movieGenres.length - 2);
+        
+                    
                     // can change the layout here ex is-half,is-one-third, 
                     var tile = $('<div class="column is-one-third is-flex">');
                     // add styling to tiles here!
                     var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
                     var title = $('<p class="title has-text-light">').text(movie.title);
-                    var tagline = $('<p class=" has-text-light is-size-4">').text(movie.tagline);
                     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
                     var overview = $('<p class="has-text-light">').text (movie.overview);
                     var image = $('<img>').attr('src', movie.posterURLs['185']);
@@ -114,11 +124,12 @@ function pickMovie(genre, keywords){
                     var media = $('<div class="media"></div>');
                     var mediaContent = $('<div class="media-content"></div>').append(image);
                     var mediaRight = $('<div class="media-right has-text-centered"></div>').append(review);
-
+                    var genres = $('<p class="has-text-light">').text('Genres: ' + movieGenres);
+                  
                     media.append(mediaContent).append(mediaRight);
                     box.append(title);
-                    box.append(tagline);
                     box.append(year);
+                    box.append(genres);
                     box.append(overview);
                     box.append(media);
 
@@ -126,6 +137,7 @@ function pickMovie(genre, keywords){
             
 
                     $("#movies").append(tile);
+
                 }
             );
         });    
