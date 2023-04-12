@@ -41,7 +41,7 @@ function pickMovie(genre, keywords){
                     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
                     var overview = $('<p class="has-text-light">').text (movie.overview);
                     var image = $('<img>').attr('src', movie.posterURLs['185']);
-                    var review = $('<p class="has-text-light">').text("ImDB Rating: " + movie.imdbRating + "/100");
+                    var review = $('<p class="has-text-light">').text("ImDB Rating: " + movie.imdbRating / 10 + "/10");
                     var media = $('<div class="media"></div>');
                     var mediaContent = $('<div class="media-content"></div>').append(image);
                     var mediaRight = $('<div class="media-right has-text-centered"></div>').append(review);
@@ -120,7 +120,7 @@ function pickMovie(genre, keywords){
                     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
                     var overview = $('<p class="has-text-light">').text (movie.overview);
                     var image = $('<img>').attr('src', movie.posterURLs['185']);
-                    var review = $('<p class="has-text-light">').text("ImDB Rating: " + movie.imdbRating + "/100");
+                    var review = $('<p class="has-text-light">').text("ImDB Rating: " + movie.imdbRating / 10 + "/10");
                     var media = $('<div class="media"></div>');
                     var mediaContent = $('<div class="media-content"></div>').append(image);
                     var mediaRight = $('<div class="media-right has-text-centered"></div>').append(review);
