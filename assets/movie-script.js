@@ -2,8 +2,8 @@ AOS.init();
 function pickMovie(genre, keywords){
     var total_movies = 0;
     $(".loader").css("display","block");
-
-    $(".is-ancestor").css("display", "block");
+    $("#chooseEmojis").css("display","none");
+    $("#presentMovies").css("display", "block");
     for (var j=0; j<keywords.length; j++){
             
             keyword = keywords[j];

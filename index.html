@@ -24,13 +24,10 @@
           <div class="column is-vcentered">
             <!-- <h1 class="title"> Emojify's Movie Picks!</h1> -->
             <div class="columns is-vcentered">
-              <div class="column"> 
-                <div id = "genreEmotion"  class="tile"></div> 
-              </div>
-              <div class="column"> 
-                <div id = "KeyWordEmotion"  class="tile"></div> 
-              </div>
-              
+    
+                <div id = "genreEmotion" ></div> 
+     
+   
             </div>
           </div>
         </div>
@@ -45,17 +42,25 @@
         <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Generate Emojis🤪</button>
         <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose an Keyword 🎪</button>
 
-        <div id="emojis" class="container is-flex is-justify-content-space-around"> </div> 
+        <div id="chooseEmojis" class="tile is-ancestor is-vcentered is-12"> 
+          <div class="tile is-vertical is-vcentered  ">
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
+                <article class="tile is-child box">
+                  <div id="emojis" class="columns is-multiline"></div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div> 
 
       </section>
       
-      <div class="tile is-ancestor is-12" style="display:none">
+      <div  id="presentMovies" class="tile is-ancestor is-12" style="display:none">
         <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child box">
-                
-                <div id="results"></div>
                 <div id="movies" class="columns is-multiline"></div>
               </article>
             </div>
