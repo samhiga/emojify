@@ -102,7 +102,7 @@ $(document).ready(function() {
         url: queryURL,
         method: "GET"
     }).then(function(results) {
-
+        $(".loader").css("display","none");
         
         for (var i = 0; i < results.length; i++) {
             if (results[i].unicodeName.includes("skin tone")){

@@ -1,6 +1,7 @@
 AOS.init();
 function pickMovie(genre, keywords){
     var total_movies = 0;
+    $(".loader").css("display","block");
 
     $(".is-ancestor").css("display", "block");
     for (var j=0; j<keywords.length; j++){
@@ -20,6 +21,7 @@ function pickMovie(genre, keywords){
             };
 
             $.ajax(settings).done(function (data) {
+                $(".loader").css("display","none");
                 var response = JSON.parse(data);
                 var results = response.result;
                 total_movies += results.length;
