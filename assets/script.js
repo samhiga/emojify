@@ -22,7 +22,6 @@ var movieMood = {
   "Sport" : ["person-sport"], //subgroup
   "Thiller" : ["drop of blood", 'skul'], 
   "Short" : ["ruler"], // 
-  "Adult" : ["no one under eighteen"], // 🔞
   "Crime" : ["police officer", "police car light", "oncoming police car", "police car"], // 👮
   "Science Fiction" : ["nerdy face", "dna", "telescope", "test tube"], // 👽
   "Mystery" : ["detective", "silhouette","briefcase",  "compass", "old key", "puzzle"], // 🕵️
@@ -53,7 +52,6 @@ var genres = {
     "Sport":"5",
     "Thriller":"53",
     "Short":"6",
-    "Adult":"7",
     "Crime":"80",
     "Science Fiction":"878",
     "Mystery":"9648",
@@ -186,6 +184,7 @@ $(document).ready(function() {
             for (var i = 0; i < random10.length; i++) {
 
                 var emoji = $('<div>');
+                emoji.addClass("tile");
                 var emojiChar = $('<h1>');
                 emoji.addClass("emojiDiv");
                 emojiChar.css({ 'font-size': "100px" });
@@ -195,13 +194,7 @@ $(document).ready(function() {
                 emoji.attr("data-group", random10[i].group);
                 emoji.attr("data-subGroup", random10[i].subGroup);
                 emoji.attr("data-name", random10[i].unicodeName);
-                // var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
-                // var p_2 = $("<p>").text("Group: " +  random10[i].group);
-                // var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
-            
-                // emoji.append(p_1);
-                // emoji.append(p_2);
-                // emoji.append(p_3);
+
                 $('#emojis').append(emoji);
                 
             }
@@ -213,11 +206,10 @@ $(document).ready(function() {
         $('#emojis').empty()
         var random10 = getRandomSubarray(keyWordsToPresent, 10);
 
-
-
         for (var i = 0; i < random10.length; i++) {
 
             var keyWordEmoji = $('<div>');
+            keyWordEmoji.addClass("tile");
             keyWordEmoji.addClass("keyWordDiv");
             var keyWordChar = $('<h1>');
             keyWordChar.css({'font-size': "100px" });
@@ -227,13 +219,7 @@ $(document).ready(function() {
             keyWordEmoji.attr("data-group", random10[i].group);
             keyWordEmoji.attr("data-subGroup", random10[i].subGroup);
             keyWordEmoji.attr("data-name", random10[i].unicodeName);
-            // var p_1 = $("<p>").text("Name: " +  random10[i].unicodeName);
-            // var p_2 = $("<p>").text("Group: " +  random10[i].group);
-            // var p_3 = $("<p>").text("Subgroup: " +  random10[i].subGroup);
-        
-            // emoji.append(p_1);
-            // emoji.append(p_2);
-            // emoji.append(p_3);
+
             $('#emojis').append(keyWordEmoji);
             
         }
@@ -247,11 +233,12 @@ $(document).ready(function() {
         var group = $(this).attr("data-group");
         var subGroup = $(this).attr("data-subGroup");
   
-        var chosenEmoji = $('<h1>');
-        chosenEmoji.css({'font-size': "150px" });
-        chosenEmoji.text($(this).children().eq(0).text());
-        $("#KeyWordEmotion").append(chosenEmoji);
-    
+        //var chosenEmoji = $('<h1>');
+        //chosenEmoji.css({'font-size': "150px" });
+        //chosenEmoji.text($(this).children().eq(0).text());
+        //$("#KeyWordEmotion").append(chosenEmoji);
+        textAlreadyThere = $("#genreEmotion").children().eq(0).text() + $(this).children().eq(0).text();
+        $("#genreEmotion").children().eq(0).text(textAlreadyThere);
        
         $('#emojis').empty();
         
@@ -287,7 +274,7 @@ $(document).ready(function() {
   
         var chosenEmoji = $('<h1>');
         chosenEmoji.css({'font-size':'150px'});
-        chosenEmoji.text($(this).children().eq(0).text());
+        chosenEmoji.text($(this).children().eq(0).text() + " ");
 
         $("#genreEmotion").append(chosenEmoji);
         $("#chooseEmoji-btn").css("display", "none");
