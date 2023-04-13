@@ -98,8 +98,6 @@ $(document).ready(function() {
     var emojiToPresent = [];
     
     var keyWordsToPresent = [];
-    var ldld = new ldLoader({ root: "#my-loader" });
-    ldld.on();
     $.ajax({
         url: queryURL,
         method: "GET"
