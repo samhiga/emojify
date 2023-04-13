@@ -66,7 +66,7 @@ var keywords = [];
 
 $(document).ready(function() {
 
-    
+   
 
     function getRandomSubarray(arr, size) {
         var shuffled = arr.slice(0), i = arr.length, temp, index;
