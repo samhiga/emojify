@@ -1,3 +1,4 @@
+AOS.init();
 function pickMovie(genre, keywords){
     var total_movies = 0;
 
@@ -53,8 +54,12 @@ function pickMovie(genre, keywords){
                     box.append(overview);
                     box.append(media);
 
+                    tile.attr("data-aos","flip-left");
+                    tile.attr("data-aos-easing","ease-out-cubic");
+                    tile.attr("data-aos-duration","2000");
                     tile.append(box);
                     $("#movies").append(tile);
+
 
                    // box.css("background-color", "#ff4d4d");
                 }   
@@ -132,7 +137,10 @@ function pickMovie(genre, keywords){
                     box.append(genres);
                     box.append(overview);
                     box.append(media);
-
+                    
+                    tile.attr("data-aos","flip-left");
+                    tile.attr("data-aos-easing","ease-out-cubic");
+                    tile.attr("data-aos-duration","2000");
                     tile.append(box);
             
 
