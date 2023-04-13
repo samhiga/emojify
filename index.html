@@ -15,6 +15,7 @@
   
   <body>
     <header class="hero is-danger">
+      <p id = "stored-movies" style = "color: white;  position: absolute; right:0; top: 0;">Get Previous Results </p>
       <div class="hero-body">
         <div class="columns">
           <div class="column"> 
@@ -40,9 +41,9 @@
         <span class="loader"></span>
         <br/>
         <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Generate Emojis🤪</button>
-        <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose an Keyword 🎪</button>
+        <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose a Keyword 🎪</button>
 
-        <div id="chooseEmojis" class="tile is-ancestor is-vcentered is-12"> 
+        <div id="chooseEmojis" class="tile is-ancestor is-vcentered is-12" style="display:none"> 
           <div class="tile is-vertical is-vcentered  ">
             <div class="tile">
               <div class="tile is-parent is-vertical">
@@ -71,6 +72,20 @@
 
 
     </main>
+
+    <div id = "modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+
+
+        <button class="delete" aria-label="close"></button>
+     
+        <section class="modal-card-body">
+          No movies are stored at this time! Please make a new selection!
+        </section>
+       
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

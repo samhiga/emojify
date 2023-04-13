@@ -64,7 +64,6 @@ var keywords = [];
 
 $(document).ready(function() {
 
-   
 
     function getRandomSubarray(arr, size) {
         var shuffled = arr.slice(0), i = arr.length, temp, index;
@@ -177,7 +176,9 @@ $(document).ready(function() {
 
   
     function GenerateEmojis(){    
+
             $('#emojis').empty()
+            $('#chooseEmojis').css("display", "block");
             var random10 = getRandomSubarray(emojiToPresent, 10);
 
 
@@ -198,7 +199,7 @@ $(document).ready(function() {
                 $('#emojis').append(emoji);
                 
             }
-            $('#chooseEmoji-btn').text("Generate emotions again! 😉");
+            $('#chooseEmoji-btn').text("Generate emojis again! 😉");
         
     }  
 
@@ -257,11 +258,7 @@ $(document).ready(function() {
         console.log(keywords);
         $("#chooseKeyWord-btn").css("display", "none");
         pickMovie(genre, keywords);
-        // if (keywords.length>5){
-        //     $("#chooseKeyWord-btn").css("display", "none");
-        //    pickMovie(genre, keywords);       
-        //}
-        
+   
 
     }
 
@@ -306,14 +303,43 @@ $(document).ready(function() {
         }
         console.log(genre);
     }
+    function showOldMovies(){
+        var getMoviegenres = JSON.parse(localStorage.getItem("movieListGenres"));
+        var getMovie = JSON.parse(localStorage.getItem("movieList"));
+        console.log(getMoviegenres);
+        console.log(getMovie);
+        $("#presentMovies").css("display", "block");
+        if (getMovie!=null){
+            $('#chooseEmoji-btn').css("display", "none");
+            for (var j=0; j<getMovie.length; j++){
+                var movie = getMovie[j];
+                displayMovie(movie);
+            }
+        }
+        else if (getMoviegenres!=null){
+            $('#chooseEmoji-btn').css("display", "none");
+            for (var j=0; j<getMoviegenres.length; j++){
+                var movie = getMoviegenrese[j];
+                displayMovie(movie);
+            }
+        }
+        else {
 
+            $('#modal').addClass("is-active");
+
+        }
+
+
+    }
 
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
-
+    $('.delete').on("click", function(){ $('#modal').removeClass("is-active");}); 
     $(document).on("click", ".emojiDiv", pickEmoji);
     $(document).on("click", ".keyWordDiv",pickKeyWord);
-
+    $('#stored-movies').on("click",showOldMovies);
+     
+     
 
 
 });

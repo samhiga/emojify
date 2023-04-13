@@ -1,19 +1,16 @@
-//var results;
-
 AOS.init();
+var moviesReceived = false;
+var allMovies=[];
+var total_movies = 0;
 function pickMovie(genre, keywords){
-    var movieReceived= false;
-    var total_movies = 0;
-    var allMovies=[];
+    
     $(".loader").css("display","block");
     $("#chooseEmojis").css("display","none");
     $("#presentMovies").css("display", "block");
     for (var j=0; j<keywords.length; j++){
             
-            keyword = keywords[j];
-
-
-            var settings = {
+        var keyword = keywords[j];
+        var settings = {
                 "async": true,
                 "crossDomain": true,
                 "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}&keyword=${keyword}`,
@@ -21,90 +18,83 @@ function pickMovie(genre, keywords){
                 "headers": {
                     "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
-                }
-
-
-            };
-
-            
-
-            $.ajax(settings).done(function (data) {
-                $(".loader").css("display","none");
-                var response = JSON.parse(data);
-                var results = response.result;
-                total_movies += results.length;
-                movieReceived=true;
-                // can change the layout here ex is-half,is-one-third, 
-               
-                for (var i = 0; i < results.length; i++) {
-                    var movie = results[i];
-                    allMovies.push(results[i]);
-                    
-                    displayMovie(movie);
-                 
-                }   
-
-                
-        
-        });
-
-    }
-    if (total_movies == 0 && movieReceived){
-        console.log("NO MOVIES FOR THIS KEYWORD!!!")
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}`,
-            "method": "GET",
-            "headers": {
-                "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
-                "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
             }
         };
 
         $.ajax(settings).done(function (data) {
+            $(".loader").css("display","none");
             var response = JSON.parse(data);
             var results = response.result;
-            var bestMoviesIds = 0;
-            var secondBestMoviesIds = 0;
-            var moviesToPresent = [0];
-            var bestMovieRating = results[0].imdbRating;
-            
-            if (results.length>1){
-                for (var i = 0; i < results.length; i++) {
-                    var movie = results[i];
+            total_movies += results.length;
+            moviesReceived = true;
+            // can change the layout here ex is-half,is-one-third, 
+               
+            for (var i = 0; i < results.length; i++) {
+                var movie = results[i];
+                console.log(movie)
+                allMovies.push(movie);
+                displayMovie(movie);
+                 
+            }   
+       
+        localStorage.setItem("movieList", JSON.stringify(allMovies));
+        var getMovie = JSON.parse(localStorage.getItem("movieList"));
+     
         
-                    if (movie.imdbRating > bestMovieRating){
-                        secondBestMoviesIds = bestMoviesIds;
-                        bestMoviesIds = i;
-                    }
-                }
-                moviesToPresent = [secondBestMoviesIds, bestMoviesIds];
-            }
-            console.log(moviesToPresent);
-            
-            moviesToPresent.forEach(element =>
-                {
-                    console.log(element);
-                    var movie = results[element];
-                    console.log(movie.title);
-
-                    allMovies.push(results[element]);
-                    console.log(movie);
-
-                    displayMovie(movie);
-                  
-
-                }
-            );
-        });    
+        });
 
     }
-console.log(allMovies);
-    localStorage.setItem("movieList", JSON.stringify(allMovies));
-   var getMovie = JSON.parse(localStorage.getItem("movieList"));
-    console.log(getMovie);
 
+
+    if (total_movies == 0){
+        console.log("NO MOVIES FOR THIS KEYWORD!!!")
+        var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}`,
+                "method": "GET",
+                "headers": {
+                    "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
+                    "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
+                }
+            };
+
+            $.ajax(settings).done(function (data) {
+                var response = JSON.parse(data);
+                var results = response.result;
+                var bestMoviesIds = 0;
+                var secondBestMoviesIds = 0;
+                var moviesToPresent = [0];
+                var bestMovieRating = results[0].imdbRating;
+                
+                if (results.length>1){
+                    for (var i = 0; i < results.length; i++) {
+                        var movie = results[i];
+            
+                        if (movie.imdbRating > bestMovieRating){
+                            secondBestMoviesIds = bestMoviesIds;
+                            bestMoviesIds = i;
+                        }
+                    }
+                    moviesToPresent = [secondBestMoviesIds, bestMoviesIds];
+                }
+                
+                moviesToPresent.forEach(element =>
+                    {
+                        var movie = results[element];
+                        allMovies.push(movie);
+                        displayMovie(movie);
+                    
+
+                    }
+                );
+
+                    
+                localStorage.setItem("movieListGenres", JSON.stringify(allMovies));
+               
+            });    
+
+    }
 }
 
 function displayMovie(movie){
