@@ -1,3 +1,5 @@
+
+
 *{
 padding: 0;
     margin: 0;
@@ -13,7 +15,7 @@ header {
     height:300px; 
     width:100%;
 }
-
+/**/
 .loader {
     width: 30px;
     height: 30px;

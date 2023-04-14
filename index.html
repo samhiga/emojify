@@ -14,6 +14,9 @@
   </head>
   
   <body>
+
+    <main>
+      <!-- main header -->
     <header class="hero is-danger">
       <p id = "stored-movies" style = "color: white;  position: absolute; right:0; top: 0;">Get Previous Results </p>
       <div class="hero-body">
@@ -35,16 +38,18 @@
           </div>
         </div>
       </div>
+      <!--startover button -->
       <button id="startOver-btn" style="display:none" class="button is-medium is-responsive is-outlined "> Start over </button>
     </header>
 
 
     <main>
+      <!-- for loading feature -->
       <section class="container has-text-centered is-4 is-offset-4" style="margin-top:35px" >
         <span class="loader"></span>
         <br/>
 
-
+        <!-- container for emojis -->
         <h1 id="click-emoji" class="is-size-4"></h2>
         <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Click to generate Emojis🤪</button> 
         <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose your next emoji 🎪</button>
@@ -63,6 +68,8 @@
         </div> 
 
       </section>
+
+      <!-- container for presenting movies -->
       
       <div  id="presentMovies" class="tile is-ancestor is-12" style="display:none">
         <div class="tile is-vertical">
@@ -87,13 +94,14 @@
 
         <button class="delete" aria-label="close"></button>
      
+        <!-- display if no search history -->
         <section class="modal-card-body">
           No movies are stored at this time! Please make a new selection!
         </section>
        
       </div>
     </div>
-
+<!-- link for jquery,aos and script.js -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
