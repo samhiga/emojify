@@ -203,7 +203,7 @@ $(document).ready(function() {
             $('#click-emoji').text("Click on the Emoji you want to select or generate new Emojis");
 
 
-            
+    }
         
     
 
