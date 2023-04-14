@@ -66,8 +66,8 @@ var keywords = [];
 
 //jquery ready function to load DOM before executing code
 $(document).ready(function() {
-
-
+    //This function takes an array and a size parameter as input and returns a shuffled subarray of the given size.
+    // This code was found on stack overflow
     function getRandomSubarray(arr, size) {
         var shuffled = arr.slice(0), i = arr.length, temp, index;
         while (i--) {
@@ -83,8 +83,7 @@ $(document).ready(function() {
     for (const [key, value] of Object.entries(movieMood)) {
         for (var j = 0; j<value.length;j++ ){
             genreEmoji.push(value[j]);
-        }
-    
+        }  
     }
     // Fetching from the Emoji API
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
@@ -102,35 +101,37 @@ $(document).ready(function() {
         method: "GET"
     }).then(function(results) {
         $(".loader").css("display","none");
-        
-       
         var wordsToExclude = ["skin tone", "E0", "E1", "E2" , "E3", "E4", "E5" , "E3", 
             "E4", "E5", "E6", "E7", "E8", "E9", "couple with heart", "-thirty", "o’clock",
             "mahjong", "new moon", "selfie"]  
-
+        // Loop through the results array 
         for (var i = 0; i < results.length; i++) {
+            // Flag to check if the current result contains any word to exclude
             var flag = true;
+            // Loop through the words to exclude array and check if the current result contains any of them
             for (var j=0; j<results.length; j++){
                 if (results[i].unicodeName.includes(wordsToExclude[j])){
                     flag = false;
                 }
             } 
+            // If the current result contains any word to exclude, continue with the next iteration
             if (!flag){
                 continue;
             }
 
-            
+            // If the current result belongs to any of the subgroups to include, add it to the keywords to present array
             if (subGroupsToInclude.includes(results[i].subGroup)){
                 keyWordsToPresent.push(results[i]);
             }
+            // If the current result belongs to any of the subgroups for emotions to include, add it to the emoji to present array
             if (subGroupsEmotionToInclude.includes(results[i].subGroup)){
                 emojiToPresent.push(results[i]);
             }
+            // If the current result doesn't belong to any of the subgroups for emotions to include,
+           // check if it contains any genre emoji and add it to the emoji to present array if it does
             else{
                 var flag = false; 
                 for (var j=0; j<genreEmoji.length; j++){
-                
-        
                     if (results[i].unicodeName.includes(genreEmoji[j])){
                         flag = true;
                     }
@@ -145,60 +146,62 @@ $(document).ready(function() {
 
     //function to display emojis
     function GenerateEmojis(){    
-
+            // Clear previous emojis and show the chooseEmojis section
             $('#emojis').empty()
             $('#chooseEmojis').css("display", "block");
+            // Get a random subset of 10 emojis from the emojiToPresent array
             var random10 = getRandomSubarray(emojiToPresent, 10);
 
-
+            // Loop through the 10 emojis and create an HTML element for each one
             for (var i = 0; i < random10.length; i++) {
-
+                // Create a div element for the emoji
                 var emoji = $('<div>');
                 emoji.addClass("tile");
-                var emojiChar = $('<h1>');
+                // Create an p element for the emoji character and add it to the emoji div
+                var emojiChar = $('<p>');
                 emoji.addClass("emojiDiv");
                 emojiChar.css({ 'font-size': "100px" });
                 emojiChar.text(random10[i].character);
                 emoji.append(emojiChar);
-                
+                // Set attributes for the emoji div to store data about the emoji
                 emoji.attr("data-group", random10[i].group);
                 emoji.attr("data-subGroup", random10[i].subGroup);
                 emoji.attr("data-name", random10[i].unicodeName);
-
+                // Append the emoji div to the #emojis section
                 $('#emojis').append(emoji);
                 
             }
-
+            // Update the text of the #click-emoji element to prompt the user to select an emoji or generate new ones
             $('#click-emoji').text("Click on the Emoji you want to select or generate new Emojis");
 
-
-
     }
-
-        
+  
     
     //generates second set of emojis based on keywords
     function GenerateKeyWords(){    
+        // Clear the emojis container
         $('#emojis').empty()
         var random10 = getRandomSubarray(keyWordsToPresent, 10);
-
+        // Loop through the 10 emojis and create an HTML element for each one
         for (var i = 0; i < random10.length; i++) {
-
+             // Create a div element for the emoji related to the keyword
             var keyWordEmoji = $('<div>');
             keyWordEmoji.addClass("tile");
             keyWordEmoji.addClass("keyWordDiv");
-            var keyWordChar = $('<h1>');
+              // Create an p element for the emoji character and add it to the emoji div
+            var keyWordChar = $('<p>');
             keyWordChar.css({'font-size': "100px" });
             keyWordChar.text(random10[i].character);
             keyWordEmoji.append(keyWordChar);
-            
+            // Set attributes for the emoji div to store data about the emoji
             keyWordEmoji.attr("data-group", random10[i].group);
             keyWordEmoji.attr("data-subGroup", random10[i].subGroup);
             keyWordEmoji.attr("data-name", random10[i].unicodeName);
-
+            // Append the emoji div to the #emojis section
             $('#emojis').append(keyWordEmoji);
             
         }
+        // Update the text of the #click-emoji element to prompt the user to select an emoji or generate new ones
         $('#chooseKeyWord-btn').text("Generate your second Emoji again! 🌹");
     }
         
@@ -206,52 +209,49 @@ $(document).ready(function() {
     function pickKeyWord(){
        
         var name = $(this).attr("data-name");
-        var group = $(this).attr("data-group");
-        var subGroup = $(this).attr("data-subGroup");
-  
-       
+        // append chosen emoji to the header 
         textAlreadyThere = $("#genreEmotion").children().eq(0).text() + $(this).children().eq(0).text();
         $("#genreEmotion").children().eq(0).text(textAlreadyThere);
-       
+       // Clear the emojis container
         $('#emojis').empty();
-        
+        // get the unicode name of the selected emoji
         name_words = name.split(" ");
-        console.log(name_words);
-        
+         // add non-redundant words to the keywords array
         for (var j=0; j<name_words.length; j++){
             word = name_words[j];
             if (word!=="person" && word!=="face" && word!=="man" && word!=="woman" && word!=="with"&& word!=="and"){
                 keywords.push(word);
             }
         }
+        // if the name consists of more than one word, add it to the keywords array as well
         if (name_words.length>1){
             keywords.push(name);
         }
-        console.log(keywords);
+        // hide the "Generate your second Emoji again!" button and call the pickMovie function to generate movie recommendations
         $("#chooseKeyWord-btn").css("display", "none");
         pickMovie(genre, keywords);
-
+        // hide the "Click on the Emoji you want to select or generate new Emojis" text
         $('#click-emoji').css("display", "none");
     }  
 
 
     //function to choose emojis and display on the top
     function pickEmoji(){
-       
+        // Set the font size and text of the chosen emoji
         var name = $(this).attr("data-name");
-        console.log(name);
-        var group = $(this).attr("data-group");
         var subGroup = $(this).attr("data-subGroup");
-  
-        var chosenEmoji = $('<h1>');
+        var chosenEmoji = $('<p>');
+
         chosenEmoji.css({'font-size':'150px'});
         chosenEmoji.text($(this).children().eq(0).text() + " ");
-
+        // Append the chosen emoji to the header
         $("#genreEmotion").append(chosenEmoji);
+        // Hide the "Choose Emoji" button and show the "Choose KeyWord" button
         $("#chooseEmoji-btn").css("display", "none");
         $("#chooseKeyWord-btn").css("display", "block");
+        // Clear the emojis container
         $('#emojis').empty();
-
+        // Determine the genre based on the selected emoji
         if (subGroup == "music"){
             genre = genres["Music"];
         }
@@ -262,58 +262,64 @@ $(document).ready(function() {
         }
         else{
             for (const [key, value] of Object.entries(movieMood)){
-                for (var j = 0; j<value.length;j++ ){
+                for (var j = 0; j<value.length; j++ ){
                     if (name.includes(value[j])){
                         genre = genres[key];
-                        console.log(key);
                         break;
                     }
                 }
             }       
         }
-        
+        // If the genre is not determined, set it to the default value "27" (Horror)
         if (!genre){
             genre = "27";
         }
-        console.log(genre);
+
     }
 
     //function for storing and retreiving past movie picks
     function showOldMovies(){
+        // Clear the movies container
         $('#movies').empty();
+        // Get the movie genres and list from localStorage
         var getMoviegenres = JSON.parse(localStorage.getItem("movieListGenres"));
         var getMovie = JSON.parse(localStorage.getItem("movieList"));
-        console.log(getMoviegenres);
-        console.log(getMovie);
 
+        // Display the presentMovies section and hide the chooseEmoji button
         $("#presentMovies").css("display", "block");
+        // If there are movie genres in localStorage, display them
         if (getMovie!=null && getMovie.length>0 ){
             $('#chooseEmoji-btn').css("display", "none");
+            // Loop through each movie and display it
             for (var j=0; j<getMovie.length; j++){
                 var movie = getMovie[j];
                 displayMovie(movie);
             }
+            // Display the startOver button if there are movies in the list
             $('#startOver-btn').css("display", "block");
         }
-        else if (getMoviegenres!=null&& getMoviegenres.length>0){
+        // If there are movie genres in localStorage that were found but were not related to the keyword. show them
+        else if (getMoviegenres!=null && getMoviegenres.length>0){
             $('#chooseEmoji-btn').css("display", "none");
+            // Loop through each movie genre and display it
             for (var j=0; j<getMoviegenres.length; j++){
                 var movie = getMoviegenres[j];
                 displayMovie(movie);
             }
+            // Display the startOver button if there are movies in the list
             $('#startOver-btn').css("display", "block");
         }
+        // If there are no movies or movie genres in localStorage, display a modal and the chooseEmojis 
         else {
             $('#modal').addClass("is-active");
+
             $('#chooseEmoji-btn').css("display", "block");
             $("#presentMovies").css("display", "none");
             $("#chooseEmojis").css("display","none");
-
         }
-
-
     }
-        //function to restart the app
+    
+    //function to restart the app
     function resetAll(){
         $('#startOver-btn').css("display", "none");
         $("#chooseEmojis").css("display","none");
@@ -323,8 +329,10 @@ $(document).ready(function() {
         $("#genreEmotion").empty();
         $('#chooseEmoji-btn').css("display", "block");
         $('#chooseEmoji-btn').text("Generate Emojis🤪");
+        kewords = [];
   
     }
+    
     //Eventlisteners to detect clicks
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
