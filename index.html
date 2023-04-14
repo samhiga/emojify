@@ -15,6 +15,7 @@
   
   <body>
     <header class="hero is-danger">
+      <p id = "stored-movies" style = "color: white;  position: absolute; right:0; top: 0;">Get Previous Results </p>
       <div class="hero-body">
         <div class="columns">
           <div class="column"> 
@@ -26,13 +27,10 @@
           <div class="column is-vcentered">
             <!-- <h1 class="title"> Emojify's Movie Picks!</h1> -->
             <div class="columns is-vcentered">
-              <div class="column"> 
-                <div id = "genreEmotion"  class="tile"></div> 
-              </div>
-              <div class="column"> 
-                <div id = "KeyWordEmotion"  class="tile"></div> 
-              </div>
-              
+    
+                <div id = "genreEmotion" ></div> 
+     
+   
             </div>
           </div>
         </div>
@@ -44,21 +42,32 @@
       <section class="container has-text-centered is-4 is-offset-4" style="margin-top:35px" >
         <span class="loader"></span>
         <br/>
-        <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Click to generate Emojis🤪</button>
+
+
         <h1 id="click-emoji" class="is-size-4"></h2>
+        <button id="chooseEmoji-btn" class="button is-large is-responsive is-outlined "> Click to generate Emojis🤪</button> 
         <button id="chooseKeyWord-btn" style="display:none"  class="button is-large is-responsive is-outlined"> Choose your next emoji 🎪</button>
 
-        <div id="emojis" class="container is-flex is-justify-content-space-around"> </div> 
+
+        <div id="chooseEmojis" class="tile is-ancestor is-vcentered is-12" style="display:none"> 
+          <div class="tile is-vertical is-vcentered  ">
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
+                <article class="tile is-child box">
+                  <div id="emojis" class="columns is-multiline"></div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div> 
 
       </section>
       
-      <div class="tile is-ancestor is-12" style="display:none">
+      <div  id="presentMovies" class="tile is-ancestor is-12" style="display:none">
         <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child box">
-                
-                <div id="results"></div>
                 <div id="movies" class="columns is-multiline"></div>
               </article>
             </div>
@@ -69,6 +78,20 @@
 
 
     </main>
+
+    <div id = "modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+
+
+        <button class="delete" aria-label="close"></button>
+     
+        <section class="modal-card-body">
+          No movies are stored at this time! Please make a new selection!
+        </section>
+       
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

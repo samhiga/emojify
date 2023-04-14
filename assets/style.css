@@ -87,3 +87,13 @@ header {
    transition: translateY(-100%); 
   width: 100%;
 } 
+
+@media screen and (max-width: 768px) {
+  header {
+    height:400px;
+  }
+  #KeyWordEmotion,
+  #genreEmotion h1{
+    font-size: 50px;
+  }
+}
