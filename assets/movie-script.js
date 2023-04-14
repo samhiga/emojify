@@ -13,12 +13,12 @@ function pickMovie(genre, keywords){
         var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}&keyword=${keyword}`,
+                "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&show_type=movie&genre=${genre}&keyword=${keyword}`,
                 "method": "GET",
                 "headers": {
                     "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
-            }
+                }
         };
 
         $.ajax(settings).done(function (data) {
@@ -38,8 +38,8 @@ function pickMovie(genre, keywords){
             }   
        
         localStorage.setItem("movieList", JSON.stringify(allMovies));
-        var getMovie = JSON.parse(localStorage.getItem("movieList"));
-     
+        $('#startOver-btn').css("display", "block")
+
         
         });
 
@@ -51,7 +51,7 @@ function pickMovie(genre, keywords){
         var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=${genre}`,
+                "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&show_type=movie&genre=${genre}`,
                 "method": "GET",
                 "headers": {
                     "X-RapidAPI-Key": "b3dbc942ddmsh8add83241714b1ap1ace8ajsn8339705327d6",
@@ -91,7 +91,8 @@ function pickMovie(genre, keywords){
 
                     
                 localStorage.setItem("movieListGenres", JSON.stringify(allMovies));
-               
+                $('#startOver-btn').css("display", "block")
+             
             });    
 
     }
@@ -134,6 +135,7 @@ function displayMovie(movie){
 
 
     $("#movies").append(tile);
+
 
 
 }
