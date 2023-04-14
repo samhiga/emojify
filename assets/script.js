@@ -312,8 +312,10 @@ $(document).ready(function() {
         // If there are no movies or movie genres in localStorage, display a modal and the chooseEmojis 
         else {
             $('#modal').addClass("is-active");
-            $("#chooseEmojis-btn").css("display","block");
+
+            $('#chooseEmoji-btn').css("display", "block");
             $("#presentMovies").css("display", "none");
+            $("#chooseEmojis").css("display","none");
         }
     }
     
