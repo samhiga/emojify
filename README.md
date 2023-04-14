@@ -6,6 +6,17 @@
 
 There are thousands of movies available for streaming. Users end up spending hours to pick a movie. This app makes it easier for users to decide on a movie based on user's moods and inclinations that are expressed through emojis. The user is presented with emojis to pick from and the algorithm recommends a list of movies. If the user ever wants to look at their past movie suggestions, they have option to do so as well.
 
+## Table of Contents 
+
+* [User Story](#user-story)
+* [APIs](#apis)
+* [AOS-library](#aos-library)
+* [Code Snippet](#code-snippet)
+* [Usage](#usage)
+* [Learning Objectives](#learning-objectives)
+* [Learning Points](#learning-points)
+* [Contributors](#contributors)
+
 ## Technologies Used
 
 
@@ -22,16 +33,6 @@ There are thousands of movies available for streaming. Users end up spending hou
 * [CSS Loaders](https://cssloaders.github.io/)
 * [AOS](https://michalsnik.github.io/aos/)
 
-## Table of Contents 
-
-* [User Story](#user-story)
-* [APIs](#apis)
-* [AOS-library](#aos-library)
-* [Code Snippet](#code-snippet)
-* [Usage](#usage)
-* [Learning Objectives](#learning-objectives)
-* [Learning Points](#learning-points)
-* [Contributors](#contributors)
 
 
 ## User Story
