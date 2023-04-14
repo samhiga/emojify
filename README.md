@@ -11,7 +11,7 @@ There are thousands of movies available for streaming. Users end up spending hou
 * [User Story](#user-story)
 * [APIs](#apis)
 * [AOS-library](#aos-library)
-* [Code Snippet](#code-snippet)
+* [Bulma](#bulma)
 * [Usage](#usage)
 * [Learning Objectives](#learning-objectives)
 * [Learning Points](#learning-points)
@@ -116,7 +116,7 @@ We utilized the AOS libary to add animation to our movie tiles.
 
 
 
-## Code Snippet
+## Bulma
 ```javascript
    var tile = $('<div class="column is-one-third is-flex">');
     var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
@@ -126,6 +126,9 @@ We utilized the AOS libary to add animation to our movie tiles.
     var image = $('<img>').attr('src', movie.posterURLs['185']);
 ```
 In the above code I used Bulma to style our movie ID in javascript. Since nothing but the ID of movie was in HTML, this was the best way to style it by using the variables to appended to our ID and applying the Bulma style here. I also had to create the tile and box variables so they would display as a tile as well.
+
+Demonstration of our site at different sizes:
+![bulma](./assets/images/shrinking%20screen.gif)
 
 ## Usage 
 
