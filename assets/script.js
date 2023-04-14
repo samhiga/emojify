@@ -309,10 +309,12 @@ $(document).ready(function() {
         console.log(genre);
     }
     function showOldMovies(){
+        $('#movies').empty();
         var getMoviegenres = JSON.parse(localStorage.getItem("movieListGenres"));
         var getMovie = JSON.parse(localStorage.getItem("movieList"));
         console.log(getMoviegenres);
         console.log(getMovie);
+
         $("#presentMovies").css("display", "block");
         if (getMovie!=null){
             $('#chooseEmoji-btn').css("display", "none");
@@ -324,7 +326,7 @@ $(document).ready(function() {
         else if (getMoviegenres!=null){
             $('#chooseEmoji-btn').css("display", "none");
             for (var j=0; j<getMoviegenres.length; j++){
-                var movie = getMoviegenrese[j];
+                var movie = getMoviegenres[j];
                 displayMovie(movie);
             }
         }
@@ -337,12 +339,25 @@ $(document).ready(function() {
 
     }
 
+    function resetAll(){
+        $('#startOver-btn').css("display", "none");
+        $("#chooseEmojis").css("display","none");
+        $("#presentMovies").css("display", "none");
+        $('#emojis').empty();
+        $('#movies').empty();
+        $("#genreEmotion").empty();
+        $('#chooseEmoji-btn').css("display", "block");
+        $('#chooseEmoji-btn').text("Generate Emojis🤪");
+  
+    }
+
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
     $('.delete').on("click", function(){ $('#modal').removeClass("is-active");}); 
     $(document).on("click", ".emojiDiv", pickEmoji);
     $(document).on("click", ".keyWordDiv",pickKeyWord);
     $('#stored-movies').on("click",showOldMovies);
+    $('#startOver-btn').on("click", resetAll);
      
      
 
