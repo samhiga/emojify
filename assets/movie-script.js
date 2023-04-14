@@ -3,6 +3,8 @@ AOS.init();
 var moviesReceived = false;
 var allMovies=[];
 var total_movies = 0;
+
+// function sends ajax request to treaming-availability server to retrieve movies
 function pickMovie(genre, keywords){
     
     $(".loader").css("display","block");
@@ -21,7 +23,7 @@ function pickMovie(genre, keywords){
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
                 }
         };
-//using ajax method to get movies
+        //using ajax method to get movies
         $.ajax(settings).done(function (data) {
             $(".loader").css("display","none");
             var response = JSON.parse(data);
@@ -137,7 +139,6 @@ function displayMovie(movie){
     tile.attr("data-aos-easing","ease-out-cubic");
     tile.attr("data-aos-duration","2000");
     tile.append(box);
-
 
     $("#movies").append(tile);
 
