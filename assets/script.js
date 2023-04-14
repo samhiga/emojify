@@ -1,5 +1,6 @@
+//array for all the emoji characters
 var movieMood = {
-  "Music": ["music"] , // 🎶 // all subgriup music!
+  "Music": ["music"] , // 🎶 // all subgroup music!
   "Romance": ["kiss", "red heart", "hearts", "heart-eyes"] , // 💏 names contating these words
   "Comedy": ["grin", "laugh", "tears of joy"], // 🤣
   "Biography": ["memo", "scroll"], // 📝
@@ -28,6 +29,7 @@ var movieMood = {
   "Documentary" : ["video camera", "film frames", "bookmark tabs"] // 📹
 };
 
+//array for all the movies
 var genres = {
     "Biography": "1",
     "Music": "10402",
@@ -58,10 +60,11 @@ var genres = {
     "Documentary":"99"
 }
 
+//global variables declared
 var genre;
 var keywords = [];
 
-
+//jquery ready function to load DOM before executing code
 $(document).ready(function() {
 
 
@@ -83,8 +86,7 @@ $(document).ready(function() {
         }
     
     }
-
-    
+    // Fetching from the Emoji API
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
     var subGroupsEmotionToInclude =["music", "person-sport"];
@@ -141,7 +143,7 @@ $(document).ready(function() {
         }
     });
 
-  
+    //function to display emojis
     function GenerateEmojis(){    
 
             $('#emojis').empty()
@@ -170,10 +172,12 @@ $(document).ready(function() {
             $('#click-emoji').text("Click on the Emoji you want to select or generate new Emojis");
 
 
+
     }
+
         
     
-
+    //generates second set of emojis based on keywords
     function GenerateKeyWords(){    
         $('#emojis').empty()
         var random10 = getRandomSubarray(keyWordsToPresent, 10);
@@ -198,16 +202,14 @@ $(document).ready(function() {
         $('#chooseKeyWord-btn').text("Generate your second Emoji again! 🌹");
     }
         
+    //function to seclect the second emoji
     function pickKeyWord(){
        
         var name = $(this).attr("data-name");
         var group = $(this).attr("data-group");
         var subGroup = $(this).attr("data-subGroup");
   
-        //var chosenEmoji = $('<h1>');
-        //chosenEmoji.css({'font-size': "150px" });
-        //chosenEmoji.text($(this).children().eq(0).text());
-        //$("#KeyWordEmotion").append(chosenEmoji);
+       
         textAlreadyThere = $("#genreEmotion").children().eq(0).text() + $(this).children().eq(0).text();
         $("#genreEmotion").children().eq(0).text(textAlreadyThere);
        
@@ -233,7 +235,7 @@ $(document).ready(function() {
     }  
 
 
-
+    //function to choose emojis and display on the top
     function pickEmoji(){
        
         var name = $(this).attr("data-name");
@@ -275,6 +277,8 @@ $(document).ready(function() {
         }
         console.log(genre);
     }
+
+    //function for storing and retreiving past movie picks
     function showOldMovies(){
         $('#movies').empty();
         var getMoviegenres = JSON.parse(localStorage.getItem("movieListGenres"));
@@ -305,7 +309,7 @@ $(document).ready(function() {
 
 
     }
-
+        //function to restart the app
     function resetAll(){
         $('#startOver-btn').css("display", "none");
         $("#chooseEmojis").css("display","none");
@@ -317,7 +321,7 @@ $(document).ready(function() {
         $('#chooseEmoji-btn').text("Generate Emojis🤪");
   
     }
-
+    //Eventlisteners to detect clicks
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
     $('.delete').on("click", function(){ $('#modal').removeClass("is-active");}); 
@@ -327,7 +331,6 @@ $(document).ready(function() {
     $('#startOver-btn').on("click", resetAll);
      
      
-
 
 });
 

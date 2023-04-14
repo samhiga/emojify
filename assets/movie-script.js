@@ -1,3 +1,4 @@
+//using AOS library to animate
 AOS.init();
 var moviesReceived = false;
 var allMovies=[];
@@ -20,7 +21,7 @@ function pickMovie(genre, keywords){
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
                 }
         };
-
+//using ajax method to get movies
         $.ajax(settings).done(function (data) {
             $(".loader").css("display","none");
             var response = JSON.parse(data);
@@ -36,8 +37,9 @@ function pickMovie(genre, keywords){
                 displayMovie(movie);
                  
             }   
-       
+       //storing past movies in the local storage
         localStorage.setItem("movieList", JSON.stringify(allMovies));
+
         $('#startOver-btn').css("display", "block")
 
         
@@ -58,7 +60,7 @@ function pickMovie(genre, keywords){
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
                 }
             };
-
+                //if no moves then get the best rated movie
             $.ajax(settings).done(function (data) {
                 var response = JSON.parse(data);
                 var results = response.result;
@@ -100,7 +102,7 @@ function pickMovie(genre, keywords){
 
     }
 }
-
+//function to style and display movies using classes for bulma
 function displayMovie(movie){
     movieGenres = "";
             
