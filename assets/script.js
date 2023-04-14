@@ -206,17 +206,14 @@ $(document).ready(function() {
     function pickKeyWord(){
        
         var name = $(this).attr("data-name");
-        var group = $(this).attr("data-group");
-        var subGroup = $(this).attr("data-subGroup");
-  
-       
+ 
         textAlreadyThere = $("#genreEmotion").children().eq(0).text() + $(this).children().eq(0).text();
         $("#genreEmotion").children().eq(0).text(textAlreadyThere);
        
         $('#emojis').empty();
         
         name_words = name.split(" ");
-        console.log(name_words);
+
         
         for (var j=0; j<name_words.length; j++){
             word = name_words[j];
@@ -227,7 +224,7 @@ $(document).ready(function() {
         if (name_words.length>1){
             keywords.push(name);
         }
-        console.log(keywords);
+
         $("#chooseKeyWord-btn").css("display", "none");
         pickMovie(genre, keywords);
 
@@ -239,8 +236,7 @@ $(document).ready(function() {
     function pickEmoji(){
        
         var name = $(this).attr("data-name");
-        console.log(name);
-        var group = $(this).attr("data-group");
+
         var subGroup = $(this).attr("data-subGroup");
   
         var chosenEmoji = $('<h1>');
@@ -265,7 +261,6 @@ $(document).ready(function() {
                 for (var j = 0; j<value.length;j++ ){
                     if (name.includes(value[j])){
                         genre = genres[key];
-                        console.log(key);
                         break;
                     }
                 }
@@ -275,7 +270,7 @@ $(document).ready(function() {
         if (!genre){
             genre = "27";
         }
-        console.log(genre);
+
     }
 
     //function for storing and retreiving past movie picks
@@ -283,8 +278,7 @@ $(document).ready(function() {
         $('#movies').empty();
         var getMoviegenres = JSON.parse(localStorage.getItem("movieListGenres"));
         var getMovie = JSON.parse(localStorage.getItem("movieList"));
-        console.log(getMoviegenres);
-        console.log(getMovie);
+
 
         $("#presentMovies").css("display", "block");
         if (getMovie!=null && getMovie.length>0 ){
@@ -295,7 +289,7 @@ $(document).ready(function() {
             }
             $('#startOver-btn').css("display", "block");
         }
-        else if (getMoviegenres!=null&& getMoviegenres.length>0){
+        else if (getMoviegenres!=null && getMoviegenres.length>0){
             $('#chooseEmoji-btn').css("display", "none");
             for (var j=0; j<getMoviegenres.length; j++){
                 var movie = getMoviegenres[j];
@@ -306,7 +300,6 @@ $(document).ready(function() {
         else {
             $('#modal').addClass("is-active");
             $("#chooseEmojis").css("display","block");
-
         }
 
 

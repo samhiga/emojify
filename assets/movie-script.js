@@ -10,6 +10,8 @@ function pickMovie(genre, keywords){
     $(".loader").css("display","block");
     $("#chooseEmojis").css("display","none");
     $("#presentMovies").css("display", "block");
+
+
     for (var j=0; j<keywords.length; j++){
             
         var keyword = keywords[j];
@@ -26,17 +28,15 @@ function pickMovie(genre, keywords){
         //using ajax method to get movies
         $.ajax(settings).done(function (data) {
             
-            
             var response = JSON.parse(data);
             var results = response.result;
-            console.log(results);       
   
-
             $(".loader").css("display","none");
             total_movies += results.length;
             moviesReceived = true;
-            // can change the layout here ex is-half,is-one-third, 
-               
+      
+            //The API may occasionally produce duplicate results,
+            //so we can get rid of duplicates   
             var titles = [];   
             for (var i = 0; i < results.length; i++) {
                 var movie = results[i];
@@ -56,9 +56,8 @@ function pickMovie(genre, keywords){
 
     }
 
-
+    // no movies for the chosen keyword has been found => present the user with a default oprion.
     if (total_movies == 0){
-        console.log("NO MOVIES FOR THIS KEYWORD!!!")
         var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -71,17 +70,20 @@ function pickMovie(genre, keywords){
             };
                 //if no moves then get the best rated movie
             $.ajax(settings).done(function (data) {
+
                 var response = JSON.parse(data);
                 var results = response.result;
                 var bestMoviesIds = 0;
                 var secondBestMoviesIds = 0;
                 var moviesToPresent = [0];
                 var bestMovieRating = results[0].imdbRating;
-                
+
+                // retieve movies with the chosen genre and choose two of them with the best raiting
                 if (results.length>1){
+
+                    
                     for (var i = 0; i < results.length; i++) {
                         var movie = results[i];
-            
                         if (movie.imdbRating > bestMovieRating){
                             secondBestMoviesIds = bestMoviesIds;
                             bestMoviesIds = i;
@@ -90,6 +92,8 @@ function pickMovie(genre, keywords){
                     moviesToPresent = [secondBestMoviesIds, bestMoviesIds];
 
                 }
+                //The API may occasionally produce duplicate results,
+                //so we can get rid of duplicates
                 var titles = [];
                 moviesToPresent.forEach(element =>
                     {
@@ -111,7 +115,13 @@ function pickMovie(genre, keywords){
 
     }
 }
-//function to style and display movies using classes for bulma
+
+// This function takes a movie object as a parameter and displays its details in a tile format
+// It first generates a comma-separated list of genres from the 'genres' array in the movie object
+// Then it creates various HTML elements to build the tile layout
+// The layout can be changed by modifying the 'is-half', 'is-one-third', etc. classes in the 'tile' element
+// Finally, it sets animation attributes using the 'data-aos' attributes of aos library to add a flip effect to the tile
+// The tile is then appended to the 'movies' element in the HTML document
 function displayMovie(movie){
     movieGenres = "";
             
@@ -123,7 +133,6 @@ function displayMovie(movie){
 
     // can change the layout here ex is-half,is-one-third, 
     var tile = $('<div class="column is-one-third is-flex">');
-    // add styling to tiles here!
     var box = $('<article class="tile is-child box has-background-danger is-align-items-center">');
     var title = $('<p class="title has-text-light">').text(movie.title);
     var year = $('<p class="has-text-light">').text('Year: ' + movie.year);
