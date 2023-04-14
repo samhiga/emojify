@@ -14,7 +14,7 @@ function pickMovie(genre, keywords){
             
         var keyword = keywords[j];
         var settings = {
-                "async": true,
+                "async": false,
                 "crossDomain": true,
                 "url": `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&show_type=movie&genre=${genre}&keyword=${keyword}`,
                 "method": "GET",

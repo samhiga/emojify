@@ -287,7 +287,7 @@ $(document).ready(function() {
         console.log(getMovie);
 
         $("#presentMovies").css("display", "block");
-        if (getMovie!=null){
+        if (getMovie!=null && getMovie.length>0 ){
             $('#chooseEmoji-btn').css("display", "none");
             for (var j=0; j<getMovie.length; j++){
                 var movie = getMovie[j];
@@ -295,7 +295,7 @@ $(document).ready(function() {
             }
             $('#startOver-btn').css("display", "block");
         }
-        else if (getMoviegenres!=null){
+        else if (getMoviegenres!=null&& getMoviegenres.length>0){
             $('#chooseEmoji-btn').css("display", "none");
             for (var j=0; j<getMoviegenres.length; j++){
                 var movie = getMoviegenres[j];
