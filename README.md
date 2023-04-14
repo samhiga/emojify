@@ -37,13 +37,18 @@ There are thousands of movies available for streaming. Users end up spending hou
 ## User Story
 
 AS A user I want to get movie suggestions based on how i'm feeling
-![Homepage](./assets/images/Image%204-13-23%20at%2010.27%20AM.jpg)
+<!-- ![Homepage](./assets/images/Image%204-13-23%20at%2010.27%20AM.jpg) -->
+<img src="./assets/images/Image%204-13-23%20at%2010.27%20AM.jpg" width=600>
 
 I WANT to see movie suggestions based on my mood using emojis to identify how i’m feeling
-![Emojis](./assets/images/Image%204-13-23%20at%2010.28%20AM%202.jpg)
+
+<img src="./assets/images/Image%204-13-23%20at%2010.28%20AM%202.jpg" width=600>
+<!-- ![Emojis](./assets/images/Image%204-13-23%20at%2010.28%20AM%202.jpg) -->
 
 SO THAT I don’t have to spend hours trying to find that one specific movie that I want
-![Movies](./assets/images/Image%204-13-23%20at%203.19%20PM.jpg)
+
+<img src="./assets/images/Image%204-13-23%20at%203.19%20PM.jpg" width=600>
+<!-- ![Movies](./assets/images/Image%204-13-23%20at%203.19%20PM.jpg) -->
 
 ### Acceptance Criteria
 GIVEN a movie based on current mood web application<br/>
