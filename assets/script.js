@@ -321,6 +321,7 @@ $(document).ready(function() {
         $("#genreEmotion").empty();
         $('#chooseEmoji-btn').css("display", "block");
         $('#chooseEmoji-btn').text("Generate Emojis🤪");
+        kewords = [];
   
     }
     //Eventlisteners to detect clicks

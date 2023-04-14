@@ -37,12 +37,14 @@ function pickMovie(genre, keywords){
             moviesReceived = true;
             // can change the layout here ex is-half,is-one-third, 
                
+            var titles = [];   
             for (var i = 0; i < results.length; i++) {
                 var movie = results[i];
-                console.log(movie)
-                allMovies.push(movie);
-                displayMovie(movie);
-                 
+                if (!titles.includes(movie.title)){
+                    titles.push(movie.title);
+                    allMovies.push(movie);
+                    displayMovie(movie);
+                }              
             }   
        //storing past movies in the local storage
         localStorage.setItem("movieList", JSON.stringify(allMovies));
