@@ -101,52 +101,19 @@ $(document).ready(function() {
     }).then(function(results) {
         $(".loader").css("display","none");
         
+       
+        var wordsToExclude = ["skin tone", "E0", "E1", "E2" , "E3", "E4", "E5" , "E3", 
+            "E4", "E5", "E6", "E7", "E8", "E9", "couple with heart", "-thirty", "o’clock",
+            "mahjong", "new moon", "selfie"]  
+
         for (var i = 0; i < results.length; i++) {
-            if (results[i].unicodeName.includes("skin tone")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E1")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E0")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E5")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("couple with heart")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("-thirty")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("o’clock")){
-                continue;
-            }
-            
-            if (results[i].unicodeName.includes("E4")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("mahjong")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("new moon")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E3")){
-                continue;
-            }
-        
-            if (results[i].unicodeName.includes("E6")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E2")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E12")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("selfie")){
+            var flag = true;
+            for (var j=0; j<results.length; j++){
+                if (results[i].unicodeName.includes(wordsToExclude[j])){
+                    flag = false;
+                }
+            } 
+            if (!flag){
                 continue;
             }
 
