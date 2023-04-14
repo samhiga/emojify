@@ -38,18 +38,17 @@ There are thousands of movies available for streaming. Users end up spending hou
 ## User Story
 
 AS A user I want to get movie suggestions based on how i'm feeling
-<!-- ![Homepage](./assets/images/Image%204-13-23%20at%2010.27%20AM.jpg) -->
+
 <img src="./assets/images/Image%204-13-23%20at%2010.27%20AM.jpg" width=600>
 
 I WANT to see movie suggestions based on my mood using emojis to identify how i’m feeling
 
 <img src="./assets/images/Image%204-13-23%20at%2010.28%20AM%202.jpg" width=600>
-<!-- ![Emojis](./assets/images/Image%204-13-23%20at%2010.28%20AM%202.jpg) -->
 
 SO THAT I don’t have to spend hours trying to find that one specific movie that I want
 
 <img src="./assets/images/Image%204-13-23%20at%203.19%20PM.jpg" width=600>
-<!-- ![Movies](./assets/images/Image%204-13-23%20at%203.19%20PM.jpg) -->
+
 
 ### Acceptance Criteria
 GIVEN a movie based on current mood web application<br/>
@@ -79,7 +78,7 @@ THEN  it will be made to be responsive to different screen sizes and devices.<br
 
 ### Open Emoji API
 The first API our group agreed to use was the Open Emoji API, it ordered the emojis into different groups that made them easy to oraganize which help later as we assigned the categories to out movies.
-![Emoji API](./assets/images/Image%204-10-23%20at%2011.46%20AM.jpg)
+<img src="./assets/images/Image%204-10-23%20at%2011.46%20AM.jpg" width=600>
 
 How we used this API:
 ```javascript
@@ -106,7 +105,6 @@ How we used this API:
                     "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com"
                 }
         };
-        //using ajax method to get movies
         $.ajax(settings).done(function (data) {
             var response = JSON.parse(data);
             var results = response.result;
