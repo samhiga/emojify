@@ -305,7 +305,9 @@ $(document).ready(function() {
         }
         else {
             $('#modal').addClass("is-active");
-            $("#chooseEmojis").css("display","block");
+            $('#chooseEmoji-btn').css("display", "block");
+            $("#presentMovies").css("display", "none");
+            $("#chooseEmojis").css("display","none");
 
         }
 
