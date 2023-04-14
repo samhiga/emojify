@@ -199,9 +199,13 @@ $(document).ready(function() {
                 $('#emojis').append(emoji);
                 
             }
-            $('#chooseEmoji-btn').text("Generate emojis again! 😉");
+
+            $('#click-emoji').text("Click on the Emoji you want to select or generate new Emojis");
+
+
+            
         
-    }  
+    
 
     function GenerateKeyWords(){    
         $('#emojis').empty()
@@ -224,10 +228,9 @@ $(document).ready(function() {
             $('#emojis').append(keyWordEmoji);
             
         }
-        $('#chooseKeyWord-btn').text("Generate keywords again! 🌹");
-    
-    }  
-
+        $('#chooseKeyWord-btn').text("Generate your second Emoji again! 🌹");
+    }
+        
     function pickKeyWord(){
        
         var name = $(this).attr("data-name");
@@ -258,9 +261,11 @@ $(document).ready(function() {
         console.log(keywords);
         $("#chooseKeyWord-btn").css("display", "none");
         pickMovie(genre, keywords);
-   
 
-    }
+        $('#click-emoji').css("display", "none");
+    }  
+
+
 
     function pickEmoji(){
        
