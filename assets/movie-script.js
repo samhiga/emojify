@@ -25,9 +25,14 @@ function pickMovie(genre, keywords){
         };
         //using ajax method to get movies
         $.ajax(settings).done(function (data) {
-            $(".loader").css("display","none");
+            
+            
             var response = JSON.parse(data);
             var results = response.result;
+            console.log(results);       
+  
+
+            $(".loader").css("display","none");
             total_movies += results.length;
             moviesReceived = true;
             // can change the layout here ex is-half,is-one-third, 

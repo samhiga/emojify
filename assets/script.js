@@ -293,6 +293,7 @@ $(document).ready(function() {
                 var movie = getMovie[j];
                 displayMovie(movie);
             }
+            $('#startOver-btn').css("display", "block");
         }
         else if (getMoviegenres!=null){
             $('#chooseEmoji-btn').css("display", "none");
@@ -300,10 +301,11 @@ $(document).ready(function() {
                 var movie = getMoviegenres[j];
                 displayMovie(movie);
             }
+            $('#startOver-btn').css("display", "block");
         }
         else {
-
             $('#modal').addClass("is-active");
+            $("#chooseEmojis").css("display","block");
 
         }
 
