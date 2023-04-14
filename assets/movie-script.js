@@ -79,15 +79,18 @@ function pickMovie(genre, keywords){
                         }
                     }
                     moviesToPresent = [secondBestMoviesIds, bestMoviesIds];
+
                 }
-                
+                var titles = [];
                 moviesToPresent.forEach(element =>
                     {
                         var movie = results[element];
-                        allMovies.push(movie);
-                        displayMovie(movie);
-                    
-
+                        if (!titles.includes(movie.title)){
+                            titles.push(movie.title);
+                            allMovies.push(movie);
+                            displayMovie(movie);
+                        }
+                        
                     }
                 );
 

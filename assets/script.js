@@ -86,8 +86,7 @@ $(document).ready(function() {
         }
     
     }
-// Fetching from the Emoji APIs
-    
+    // Fetching from the Emoji API
     var queryURL = "https://emoji-api.com/emojis?access_key=352cbcc2559967a6e748bbd1b737ab1e71d5f6a5"
     
     var subGroupsEmotionToInclude =["music", "person-sport"];
@@ -104,52 +103,19 @@ $(document).ready(function() {
     }).then(function(results) {
         $(".loader").css("display","none");
         
+       
+        var wordsToExclude = ["skin tone", "E0", "E1", "E2" , "E3", "E4", "E5" , "E3", 
+            "E4", "E5", "E6", "E7", "E8", "E9", "couple with heart", "-thirty", "o’clock",
+            "mahjong", "new moon", "selfie"]  
+
         for (var i = 0; i < results.length; i++) {
-            if (results[i].unicodeName.includes("skin tone")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E1")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E0")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E5")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("couple with heart")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("-thirty")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("o’clock")){
-                continue;
-            }
-            
-            if (results[i].unicodeName.includes("E4")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("mahjong")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("new moon")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E3")){
-                continue;
-            }
-        
-            if (results[i].unicodeName.includes("E6")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E2")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("E12")){
-                continue;
-            }
-            if (results[i].unicodeName.includes("selfie")){
+            var flag = true;
+            for (var j=0; j<results.length; j++){
+                if (results[i].unicodeName.includes(wordsToExclude[j])){
+                    flag = false;
+                }
+            } 
+            if (!flag){
                 continue;
             }
 
@@ -177,7 +143,7 @@ $(document).ready(function() {
         }
     });
 
-//function to display emojis
+    //function to display emojis
     function GenerateEmojis(){    
 
             $('#emojis').empty()
@@ -206,10 +172,12 @@ $(document).ready(function() {
             $('#click-emoji').text("Click on the Emoji you want to select or generate new Emojis");
 
 
-        }
+
+    }
+
         
     
-//generates second set of emojis based on keywords
+    //generates second set of emojis based on keywords
     function GenerateKeyWords(){    
         $('#emojis').empty()
         var random10 = getRandomSubarray(keyWordsToPresent, 10);
@@ -234,7 +202,7 @@ $(document).ready(function() {
         $('#chooseKeyWord-btn').text("Generate your second Emoji again! 🌹");
     }
         
-//function to seclect the second emoji
+    //function to seclect the second emoji
     function pickKeyWord(){
        
         var name = $(this).attr("data-name");
@@ -267,7 +235,7 @@ $(document).ready(function() {
     }  
 
 
-//function to choose emojis and display on the top
+    //function to choose emojis and display on the top
     function pickEmoji(){
        
         var name = $(this).attr("data-name");
@@ -353,7 +321,7 @@ $(document).ready(function() {
         $('#chooseEmoji-btn').text("Generate Emojis🤪");
   
     }
-//Eventlisteners to detect clicks
+    //Eventlisteners to detect clicks
     $(document).on("click", "#chooseEmoji-btn", GenerateEmojis);
     $(document).on("click", "#chooseKeyWord-btn", GenerateKeyWords);
     $('.delete').on("click", function(){ $('#modal').removeClass("is-active");}); 
@@ -363,7 +331,6 @@ $(document).ready(function() {
     $('#startOver-btn').on("click", resetAll);
      
      
-
 
 });
 
